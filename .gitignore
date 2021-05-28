@@ -1,0 +1,7 @@
+/__pycache__
+/.vscode
+*/__pycache__
+/src/*/work
+/src/.mpf
+/src/.vhd.bak
+/src/.cr.mpi
