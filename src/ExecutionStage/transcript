@@ -1,0 +1,465 @@
+# Loading project Arch_Execution
+# Compile of AluController.vhd was successful.
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd failed with 12 errors.
+# Compile of ALU.vhd failed with 3 errors.
+# Compile of ALU.vhd failed with 3 errors.
+# Compile of ALU.vhd failed with 2 errors.
+# Compile of ALU.vhd failed with 2 errors.
+# Compile of ALU.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd was successful.
+# Compile of ALU.vhd was successful.
+vsim work.alu
+# vsim work.alu 
+# Start time: 01:01:31 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+add wave -position insertpoint  \
+sim:/alu/Operand1 \
+sim:/alu/Operand2 \
+sim:/alu/AluSignal \
+sim:/alu/AluOut \
+sim:/alu/Flags \
+sim:/alu/add \
+sim:/alu/sub \
+sim:/alu/addOut \
+sim:/alu/subOut \
+sim:/alu/addcarry \
+sim:/alu/subcarry
+noforce sim:/alu/Operand2
+force -freeze sim:/alu/Operand2 100 0
+# Value length (3) does not equal array index length (32).
+# ** UI-Msg: (vsim-4011) Invalid force value: 100 0.
+# 
+force -freeze sim:/alu/Operand1 'd10 0
+force -freeze sim:/alu/Operand2 'd10 0
+run
+force -freeze sim:/alu/Operand2 'd-10 0
+# Invalid decimal digit: -.
+# ** UI-Msg: (vsim-4011) Invalid force value: 'd-10 0.
+# 
+force -freeze sim:/alu/Operand2 'd-10 0
+# Invalid decimal digit: -.
+# ** UI-Msg: (vsim-4011) Invalid force value: 'd-10 0.
+# 
+force -freeze sim:/alu/Operand1 10000000000000000000000000001010 0
+force -freeze sim:/alu/Operand1 10000000000000000000000000001010 0
+run
+force -freeze sim:/alu/Operand1 -'d10 0
+# Unknown option: 'd10
+# ** UI-Msg: (vish-4003) Invalid option '-'d10'.
+# 
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+force -freeze sim:/alu/Operand1 -32'd10 0
+run
+quit -sim
+# End time: 01:30:38 on May 31,2021, Elapsed time: 0:29:07
+# Errors: 0, Warnings: 16
+# Compile of ALU.vhd failed with 2 errors.
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd was successful.
+vsim work.alu
+# vsim work.alu 
+# Start time: 01:43:29 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+add wave -position insertpoint  \
+sim:/alu/Operand1 \
+sim:/alu/Operand2 \
+sim:/alu/AluSignal \
+sim:/alu/AluOut \
+sim:/alu/Flags \
+sim:/alu/addRes \
+sim:/alu/subRes \
+sim:/alu/notRes
+force -freeze sim:/alu/Operand1 -32'd-2 0
+# Invalid decimal digit: -.
+# ** UI-Msg: (vsim-4011) Invalid force value: -32'd-2 0.
+# 
+force -freeze sim:/alu/Operand1 -32'd2 0
+force -freeze sim:/alu/Operand2 32'd1 0
+run
+quit -sim
+# End time: 01:47:39 on May 31,2021, Elapsed time: 0:04:10
+# Errors: 0, Warnings: 5
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd was successful with warnings.
+# Compile of ALU.vhd was successful.
+vsim work.forwardingunit
+# vsim work.forwardingunit 
+# Start time: 01:54:39 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.forwardingunit(forwardingunit_arch)
+vsim work.alu
+# End time: 01:55:04 on May 31,2021, Elapsed time: 0:00:25
+# Errors: 0, Warnings: 4
+# vsim work.alu 
+# Start time: 01:55:04 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+add wave -position insertpoint  \
+sim:/alu/Operand1 \
+sim:/alu/Operand2 \
+sim:/alu/AluSignal \
+sim:/alu/AluOut \
+sim:/alu/Flags \
+sim:/alu/addRes \
+sim:/alu/subRes \
+sim:/alu/notRes \
+sim:/alu/negRes
+force -freeze sim:/alu/Operand1 -32'd22 0
+force -freeze sim:/alu/Operand2 'd10 0
+run
+quit -sim
+# End time: 01:59:06 on May 31,2021, Elapsed time: 0:04:02
+# Errors: 0, Warnings: 1
+alu.do
+# invalid command name "alu.do"
+do alu.do
+# vsim work.alu 
+# Start time: 01:59:55 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+quit -sim
+# End time: 02:00:13 on May 31,2021, Elapsed time: 0:00:18
+# Errors: 0, Warnings: 1
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 02:00:35 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+force -freeze sim:/alu/Operand1 'd200 0
+run
+quit -sim
+# End time: 02:02:10 on May 31,2021, Elapsed time: 0:01:35
+# Errors: 0, Warnings: 2
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 03:09:34 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+add wave -position insertpoint  \
+sim:/alu/Operand1 \
+sim:/alu/Operand2 \
+sim:/alu/AluSignal \
+sim:/alu/AluOut \
+sim:/alu/Flags \
+sim:/alu/addRes \
+sim:/alu/subRes \
+sim:/alu/notRes \
+sim:/alu/negRes \
+sim:/alu/shlRes \
+sim:/alu/shrRes \
+sim:/alu/rrcRes \
+sim:/alu/rlcRes \
+sim:/alu/shiftAmount \
+sim:/alu/c
+add wave sim:/alu/*
+quit -sim
+# End time: 03:11:00 on May 31,2021, Elapsed time: 0:01:26
+# Errors: 0, Warnings: 3
+do alu.do
+# vsim work.alu 
+# Start time: 03:11:03 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+force -freeze sim:/alu/Operand1 00000000000000000000000011001001 0
+run
+quit -sim
+# End time: 03:12:07 on May 31,2021, Elapsed time: 0:01:04
+# Errors: 0, Warnings: 1
+# Compile of ForwardingUnit.vhd was successful.
+# Compile of AluController.vhd was successful.
+# Compile of ALU.vhd failed with 1 errors.
+# 3 compiles, 1 failed with 1 error.
+# Compile of ALU.vhd was successful.
+quit -sim
+do alu.do
+# vsim work.alu 
+# Start time: 03:27:08 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+# ** Fatal: (vsim-3734) Index value -2147483616 is out of range 31 downto 0.
+#    Time: 0 ps  Iteration: 0  Process: /alu/line__42 File: /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd
+# Fatal error in Architecture Alu_Arch at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd line 42
+# 
+# HDL call sequence:
+# Stopped at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd 42 Architecture Alu_Arch
+# 
+# Cannot continue because of fatal error.
+# HDL call sequence:
+# Stopped at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd 42 Architecture Alu_Arch
+# 
+quit -sim
+# End time: 03:56:13 on May 31,2021, Elapsed time: 0:29:05
+# Errors: 1, Warnings: 4
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 03:57:15 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+# ** Fatal: (vsim-3734) Index value -2147483648 is out of range 31 downto 0.
+#    Time: 0 ps  Iteration: 0  Process: /alu/line__44 File: /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd
+# Fatal error in Architecture Alu_Arch at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd line 44
+# 
+# HDL call sequence:
+# Stopped at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd 44 Architecture Alu_Arch
+# 
+# Cannot continue because of fatal error.
+# HDL call sequence:
+# Stopped at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd 44 Architecture Alu_Arch
+# 
+quit -sim
+# End time: 03:59:14 on May 31,2021, Elapsed time: 0:01:59
+# Errors: 1, Warnings: 2
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 03:59:28 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+# ** Fatal: (vsim-3734) Index value -2147483648 is out of range 31 downto 0.
+#    Time: 0 ps  Iteration: 0  Process: /alu/line__42 File: /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd
+# Fatal error in Architecture Alu_Arch at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd line 42
+# 
+# HDL call sequence:
+# Stopped at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd 42 Architecture Alu_Arch
+# 
+# Cannot continue because of fatal error.
+# HDL call sequence:
+# Stopped at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd 42 Architecture Alu_Arch
+# 
+quit -sim
+# End time: 04:00:09 on May 31,2021, Elapsed time: 0:00:41
+# Errors: 1, Warnings: 2
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 04:00:22 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+quit -sim
+# End time: 04:01:49 on May 31,2021, Elapsed time: 0:01:27
+# Errors: 0, Warnings: 2
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 04:02:08 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+quit -sim
+# End time: 04:03:58 on May 31,2021, Elapsed time: 0:01:50
+# Errors: 0, Warnings: 2
+# Compile of ALU.vhd was successful.
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 04:04:45 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+force -freeze sim:/alu/Operand1 00000000000000000000001011001000 0
+run
+quit -sim
+# End time: 04:08:05 on May 31,2021, Elapsed time: 0:03:20
+# Errors: 0, Warnings: 3
+do alu.do
+# vsim work.alu 
+# Start time: 04:08:08 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+force -freeze sim:/alu/Operand2 00000000000000000000000000000010 0
+force -freeze sim:/alu/Operand1 11111111111111111111111111101010 0
+run
+quit -sim
+# End time: 04:10:03 on May 31,2021, Elapsed time: 0:01:55
+# Errors: 0, Warnings: 1
+do alu.do
+# vsim work.alu 
+# Start time: 04:10:06 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+quit -sim
+# End time: 04:10:20 on May 31,2021, Elapsed time: 0:00:14
+# Errors: 0, Warnings: 1
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 04:10:33 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+# ** Fatal: (vsim-3734) Index value 32 is out of range 31 downto 0.
+#    Time: 0 ps  Iteration: 1  Process: /alu/line__44 File: /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd
+# Fatal error in Architecture Alu_Arch at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd line 44
+# 
+# HDL call sequence:
+# Stopped at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd 44 Architecture Alu_Arch
+# 
+quit -sim
+# End time: 04:11:32 on May 31,2021, Elapsed time: 0:00:59
+# Errors: 1, Warnings: 2
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 04:11:45 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+# ** Fatal: (vsim-3734) Index value 32 is out of range 31 downto 0.
+#    Time: 0 ps  Iteration: 1  Process: /alu/line__44 File: /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd
+# Fatal error in Architecture Alu_Arch at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd line 44
+# 
+# HDL call sequence:
+# Stopped at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd 44 Architecture Alu_Arch
+# 
+quit -sim
+# End time: 04:12:06 on May 31,2021, Elapsed time: 0:00:21
+# Errors: 1, Warnings: 2
+# Compile of ALU.vhd was successful.
+quit -sim
+do alu.do
+# vsim work.alu 
+# Start time: 04:12:46 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+force -freeze sim:/alu/Operand1 11111111111111111111111111100010 0
+quit -sim
+# End time: 04:14:02 on May 31,2021, Elapsed time: 0:01:16
+# Errors: 0, Warnings: 3
+do alu.do
+# vsim work.alu 
+# Start time: 04:14:05 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+quit -sim
+# End time: 04:14:32 on May 31,2021, Elapsed time: 0:00:27
+# Errors: 0, Warnings: 1
+do alu.do
+# vsim work.alu 
+# Start time: 04:14:34 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+force -freeze sim:/alu/Operand2 00000000000000000000000000000010 0
+run
+force -freeze sim:/alu/Operand1 10111111111111111111111111100010 0
+run
+quit -sim
+# End time: 04:17:04 on May 31,2021, Elapsed time: 0:02:30
+# Errors: 0, Warnings: 1
+quit -sim
+run
+# No Design Loaded!
+do alu.do
+# vsim work.alu 
+# Start time: 04:17:33 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+quit -sim
+# End time: 04:17:41 on May 31,2021, Elapsed time: 0:00:08
+# Errors: 0, Warnings: 2
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 04:17:54 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+run
+force -freeze sim:/alu/Operand1 11111111111111111111111111100000 0
+run
+force -freeze sim:/alu/Operand1 10111111111111111111111111100000 0
+run
+quit -sim
+# End time: 04:25:43 on May 31,2021, Elapsed time: 0:07:49
+# Errors: 0, Warnings: 2
+# Compile of ALU.vhd failed with 2 errors.
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 04:29:49 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+quit -sim
+# End time: 04:31:13 on May 31,2021, Elapsed time: 0:01:24
+# Errors: 0, Warnings: 3
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd failed with 2 errors.
+# Compile of ALU.vhd was successful.
+# Compile of ALU.vhd was successful.
