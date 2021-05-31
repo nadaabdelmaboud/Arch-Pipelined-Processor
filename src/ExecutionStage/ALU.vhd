@@ -9,7 +9,7 @@ ENTITY Alu IS
 	  CarryOld : IN std_logic;
 	  clk : IN std_logic;
 	  AluOut : OUT std_logic_vector(31 DOWNTO 0);
-	  Flags : OUT std_logic_vector(2 DOWNTO 0)
+	  Flags : OUT std_logic_vector(2 DOWNTO 0) :="000"
         );
 END Alu;
 
@@ -37,6 +37,8 @@ SIGNAL shlCarry :  std_logic;
 SIGNAL shrCarry :  std_logic;
 
 SIGNAL CarryIn :  std_logic;
+
+SIGNAL OutTemp : std_logic_vector(31 DOWNTO 0);
 --SIGNAL subcarry :  std_logic;
 
   BEGIN
@@ -51,19 +53,19 @@ SIGNAL CarryIn :  std_logic;
 	shrRes <= STD_LOGIC_VECTOR(shift_right(unsigned(Operand1), shiftAmount));
 
 	shiftAmount <= to_integer(unsigned(Operand2(4 DOWNTO 0)));
-	shrCarry <= Operand1(shiftAmount - 1);
+	shrCarry <= Operand1(shiftAmount - 1) WHEN shiftAmount /= 0;
 	shiftAmountLeft <= 32 - shiftAmount;
-	shlCarry <= Operand1(shiftAmountLeft);
+	shlCarry <= Operand1(shiftAmountLeft) WHEN shiftAmountLeft /= 32;
 
 	rrcRes <= CarryIn & Operand1(31 DOWNTO 1);
 	rlcRes <= Operand1(30 DOWNTO 0) & CarryIn;
 
 	andRes <= Operand1 and Operand2; --addition
         orRes <= Operand2 or Operand1; --subtraction Rsrc - Rdst
-	incRes <= std_logic_vector(signed(Operand1(31) & Operand1) + 1); --addition
-        decRes <= std_logic_vector(signed(Operand1(31) & Operand1) - 1 ); --subtraction
+	incRes <= std_logic_vector(signed(Operand1(31) & Operand1) + 1); --INC
+        decRes <= std_logic_vector(signed(Operand1(31) & Operand1) - 1 ); --DEC
 
-	AluOut <= addRes(31 DOWNTO 0) WHEN AluSignal = "00000"
+	OutTemp <= addRes(31 DOWNTO 0) WHEN AluSignal = "00000"
 	ELSE subRes(31 DOWNTO 0) WHEN AluSignal = "00001"
 	ELSE notRes WHEN AluSignal = "00010"
 	ELSE negRes(31 DOWNTO 0) WHEN AluSignal = "00011"
@@ -79,15 +81,27 @@ SIGNAL CarryIn :  std_logic;
 	ELSE incRes(31 DOWNTO 0) WHEN AluSignal = "01111"
 	ELSE decRes(31 DOWNTO 0) WHEN AluSignal = "10000"
 	ELSE "00000000000000000000000000000000";
+	
+	AluOut <= OutTemp;
+	
+	---Flags handling
+	---Zero Flag
+	Flags(0) <= '1' WHEN 
+	OutTemp = "00000000000000000000000000000000" and AluSignal /= "01010" and AluSignal /= "01011" and AluSignal /= "10001";
 
+	---Negative Flag
+	Flags(1) <= OutTemp(31) WHEN AluSignal /= "01011" and AluSignal /= "10001";
 
- 	PROCESS(clk)
-      	BEGIN
- 		IF(rising_edge(clk)) THEN
-       			CarryIn <= CarryOld;
-      		END IF;
-    	END PROCESS;
+	---Carry Flag with Shift operations
+	Flags(2) <= '0'   WHEN AluSignal = "00100"
+	ELSE '1'          WHEN AluSignal = "00101"
+	ELSE shlCarry     WHEN AluSignal = "00110"
+	ELSE shrCarry     WHEN AluSignal = "00111"
+	ELSE Operand1(31) WHEN AluSignal = "01000"
+	ELSE Operand1(0)  WHEN AluSignal = "01001";
 
+	CarryIn <= CarryOld;
+         
 END Alu_Arch;
 
 

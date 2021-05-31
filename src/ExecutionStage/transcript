@@ -463,3 +463,317 @@ quit -sim
 # Compile of ALU.vhd failed with 2 errors.
 # Compile of ALU.vhd was successful.
 # Compile of ALU.vhd was successful.
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd was successful with warnings.
+# Compile of ALU.vhd failed with 3 errors.
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd failed with 3 errors.
+# Compile of ALU.vhd was successful.
+# Compile of ALU.vhd failed with 1 errors.
+# Compile of ALU.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of ALU.vhd failed with 3 errors.
+# Compile of ALU.vhd failed with 3 errors.
+# Compile of ALU.vhd was successful.
+# Compile of ALU.vhd was successful.
+do alu.do
+# vsim work.alu 
+# Start time: 18:17:10 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+quit -sim
+# End time: 18:18:28 on May 31,2021, Elapsed time: 0:01:18
+# Errors: 0, Warnings: 22
+do alu2.do
+# vsim work.alu 
+# Start time: 18:18:32 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+add wave -position insertpoint  \
+sim:/alu/Operand1 \
+sim:/alu/Operand2 \
+sim:/alu/AluSignal \
+sim:/alu/CarryOld \
+sim:/alu/clk \
+sim:/alu/AluOut \
+sim:/alu/Flags
+force -freeze sim:/alu/clk 0 0, 1 {50 ps} -r 100
+force -freeze sim:/alu/Operand1 'd40 0
+force -freeze sim:/alu/Operand2 'd90 0
+force -freeze sim:/alu/CarryOld 0 0
+force -freeze sim:/alu/AluSignal 00000 0
+run
+quit -sim
+# End time: 18:27:21 on May 31,2021, Elapsed time: 0:08:49
+# Errors: 0, Warnings: 1
+# Compile of ALU.vhd was successful.
+do alu2.do
+# vsim work.alu 
+# Start time: 18:28:31 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+quit -sim
+# End time: 18:28:43 on May 31,2021, Elapsed time: 0:00:12
+# Errors: 0, Warnings: 2
+do alu2.do
+# vsim work.alu 
+# Start time: 18:28:44 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+force -freeze sim:/alu/AluSignal 00001 0
+run
+do alu2.do
+# End time: 18:30:25 on May 31,2021, Elapsed time: 0:01:41
+# Errors: 0, Warnings: 1
+# vsim work.alu 
+# Start time: 18:30:25 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+force -freeze sim:/alu/Operand1 'd40 0
+run
+quit -sim
+# End time: 18:33:02 on May 31,2021, Elapsed time: 0:02:37
+# Errors: 0, Warnings: 1
+do alu2.do
+# vsim work.alu 
+# Start time: 18:33:04 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+quit -sim
+# End time: 18:33:31 on May 31,2021, Elapsed time: 0:00:27
+# Errors: 0, Warnings: 1
+# Compile of ALU.vhd was successful.
+do alu2.do
+# vsim work.alu 
+# Start time: 18:33:42 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+force -freeze sim:/alu/AluSignal 00100 0
+run
+force -freeze sim:/alu/AluSignal 00101 0
+run
+force -freeze sim:/alu/AluSignal 00100 0
+run
+force -freeze sim:/alu/AluSignal 00101 0
+run
+force -freeze sim:/alu/AluSignal 01000 0
+run
+force -freeze sim:/alu/CarryOld 1 0
+run
+force -freeze sim:/alu/AluSignal 01001 0
+run
+force -freeze sim:/alu/AluSignal 01110 0
+run
+force -freeze sim:/alu/Operand1 'd0 0
+force -freeze sim:/alu/AluSignal 01111 0
+restart
+run
+force -freeze sim:/alu/AluSignal 10000 0
+run
+quit -sim
+# End time: 19:17:21 on May 31,2021, Elapsed time: 0:43:39
+# Errors: 0, Warnings: 2
+# Compile of ALU.vhd was successful.
+# Compile of ExecutionUnit.vhd failed with 1 errors.
+# Compile of ExecutionUnit.vhd was successful.
+# Compile of ExecutionUnit.vhd failed with 2 errors.
+# Compile of ExecutionUnit.vhd failed with 1 errors.
+# Compile of ExecutionUnit.vhd was successful.
+# Compile of ExecutionUnit.vhd was successful.
+# Compile of ExecutionUnit.vhd was successful.
+# Compile of ExecutionUnit.vhd failed with 6 errors.
+# Compile of ExecutionUnit.vhd failed with 2 errors.
+# Compile of ExecutionUnit.vhd failed with 1 errors.
+# Compile of ExecutionUnit.vhd was successful.
+# Compile of ForwardingUnit.vhd was successful.
+# Compile of AluController.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of ExecutionUnit.vhd was successful.
+# 4 compiles, 0 failed with no errors.
+vsim work.executionunit
+# vsim work.executionunit 
+# Start time: 22:29:30 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.executionunit(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+add wave -position insertpoint  \
+sim:/executionunit/clk \
+sim:/executionunit/Signals \
+sim:/executionunit/Opcode \
+sim:/executionunit/RdstAddress \
+sim:/executionunit/RsrcAddress \
+sim:/executionunit/RdstData \
+sim:/executionunit/RsrcData \
+sim:/executionunit/InData \
+sim:/executionunit/Immediate \
+sim:/executionunit/AluDataForwarded \
+sim:/executionunit/AluRdstAddress \
+sim:/executionunit/RegWriteAlu \
+sim:/executionunit/MemToRegAlu \
+sim:/executionunit/MemDataForwarded \
+sim:/executionunit/MemRdstAddress \
+sim:/executionunit/RegWriteMem \
+sim:/executionunit/MemToRegMem \
+sim:/executionunit/Sp \
+sim:/executionunit/MemDataIn \
+sim:/executionunit/AluDataOut \
+sim:/executionunit/SpOut \
+sim:/executionunit/Flags
+force -freeze sim:/executionunit/clk 0 0, 1 {50 ps} -r 100
+force -freeze sim:/executionunit/Signals 'd0 0
+force -freeze sim:/executionunit/RdstAddress 000 0
+force -freeze sim:/executionunit/RsrcAddress 000 0
+force -freeze sim:/executionunit/RsrcData 'd0 0
+force -freeze sim:/executionunit/RdstData 'd0 0
+force -freeze sim:/executionunit/RegWriteAlu 0 0
+force -freeze sim:/executionunit/MemToRegAlu 0 0
+force -freeze sim:/executionunit/RegWriteMem 0 0
+force -freeze sim:/executionunit/MemToRegMem 0 0
+force -freeze sim:/executionunit/Opcode 00100 0
+# Value length (5) does not equal array index length (6).
+# ** UI-Msg: (vsim-4011) Invalid force value: 00100 0.
+# 
+force -freeze sim:/executionunit/Opcode 000001 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /executionunit/Alu1
+# ** Fatal: (vsim-3734) Index value -1 is out of range 31 downto 0.
+#    Time: 0 ps  Iteration: 1  Process: /executionunit/Alu1/line__56 File: /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd
+# Fatal error in Architecture Alu_Arch at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd line 56
+# 
+# HDL call sequence:
+# Stopped at /home/menna/Downloads/architecture2/Arch-Pipelined-Processor/src/ExecutionStage/ALU.vhd 56 Architecture Alu_Arch
+# 
+force -freeze sim:/executionunit/RdstData 00000000000000000000000000000000 0
+quit -sim
+# End time: 22:41:41 on May 31,2021, Elapsed time: 0:12:11
+# Errors: 1, Warnings: 15
+# Compile of ALU.vhd was successful.
+do ex.do
+# vsim work.executionunit 
+# Start time: 22:44:24 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.executionunit(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /executionunit/Alu1
+force -freeze sim:/executionunit/Opcode 001101 0
+run
+quit -sim
+# End time: 22:50:03 on May 31,2021, Elapsed time: 0:05:39
+# Errors: 0, Warnings: 3
+do ex.do
+# vsim work.executionunit 
+# Start time: 22:50:08 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.executionunit(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /executionunit/Alu1
+run
+quit -sim
+# End time: 22:52:55 on May 31,2021, Elapsed time: 0:02:47
+# Errors: 0, Warnings: 2
+# Compile of ExecutionUnit.vhd was successful.
+do ex.do
+# vsim work.executionunit 
+# Start time: 22:55:47 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.executionunit(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /executionunit/Alu1
+quit -sim
+# End time: 22:58:43 on May 31,2021, Elapsed time: 0:02:56
+# Errors: 0, Warnings: 3
+# Compile of ExecutionUnit.vhd was successful.
+do ex.do
+# vsim work.executionunit 
+# Start time: 22:59:05 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.executionunit(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /executionunit/Alu1
+quit -sim
+# End time: 23:00:13 on May 31,2021, Elapsed time: 0:01:08
+# Errors: 0, Warnings: 3
+do ex.do
+# vsim work.executionunit 
+# Start time: 23:00:15 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.executionunit(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /executionunit/Alu1
+quit -sim
+# End time: 23:02:15 on May 31,2021, Elapsed time: 0:02:00
+# Errors: 0, Warnings: 2
+# Compile of ExecutionUnit.vhd was successful.
+do ex.do
+# vsim work.executionunit 
+# Start time: 23:03:47 on May 31,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.executionunit(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /executionunit/Alu1
+run
