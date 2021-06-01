@@ -9,12 +9,12 @@ END Reg;
 
 ARCHITECTURE a_Reg OF Reg IS
   BEGIN
-    PROCESS(clk,rst)
+    PROCESS(clk,rst,enable)
       BEGIN
       IF (enable = '0') THEN null;
       ELSIF(rst = '1') THEN
         q <= (others => '0');
-      ELSIF  clk'event and clk = '1'  THEN
+      ELSE
         q <= d;
       END IF;
     END PROCESS;
