@@ -1,0 +1,24 @@
+mov r1 , r5 
+add r2 , r3 
+sub r1 , r4
+or r6 , r4
+setc 
+clrc
+ret
+clr r1
+not r2
+inc r3
+dec r4
+neg r5
+rlc r6
+rrc r7
+out r1 , r2 
+in r2 ,r3
+jz R1
+jn R1
+jc R1
+jmp R1
+call r1
+push r1 
+pop r1
+
