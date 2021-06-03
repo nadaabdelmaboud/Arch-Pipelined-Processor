@@ -1,0 +1,7 @@
+.org 1
+10
+iadd R0 ,1000
+nop
+setc
+
+
