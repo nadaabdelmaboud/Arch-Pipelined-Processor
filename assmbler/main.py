@@ -20,8 +20,8 @@ current_address = 0
 new_lines = []
 addresses = []
 labels = {}
-reserved_words = ['nop','setc','clrc','mov','add','sub','and','or','clr','not','inc','dec','neg','rlc','rrc','jz','jn','jc','jmp','out','in','iadd',
-                    'shl','shr','ldm','ldd','std','call','ret','push','pop','org']
+reserved_words = ['nop', 'setc', 'clrc', 'mov', 'add', 'sub', 'and', 'or', 'clr', 'not', 'inc', 'dec', 'neg', 'rlc', 'rrc', 'jz', 'jn', 'jc', 'jmp', 'out', 'in', 'iadd',
+                  'shl', 'shr', 'ldm', 'ldd', 'std', 'call', 'ret', 'push', 'pop', 'org']
 for line in lines:
 
     # remove trailing whitespaces
@@ -81,7 +81,7 @@ for line in lines:
 
 # this pass aims to convert code lines to binary
 
-#done
+# done
 operands_2 = {
     # format
     # 4 bits opcode
@@ -92,14 +92,14 @@ operands_2 = {
     'and':  '000110',
     'or': '000111'
 }
-#done
+# done
 no_operands = {
     'nop': '0000000000000000',
     'setc': '0000010000000000',
     'clrc': '0000100000000000',
     'ret':  '1010010000000000'
 }
-#done
+# done
 operands_1 = {
     # 1 operand instructions
     # format
@@ -126,14 +126,14 @@ imidite = {
     'ldm': '010011',
     'ldd': '010100',
     'std': '010101'
-} 
-#done
+}
+# done
 inOrOut = {
     # no operands
     'out': '011000',
     'in': '011001'
 }
-#done
+# done
 jump = {
     # Jump sub-routine
     # format
@@ -146,7 +146,7 @@ jump = {
     'jc':  '100010',
     'jmp': '100011'
 }
-#done
+# done
 stack = {
     'call':  '101000',
     'push':  '101010',
@@ -188,7 +188,7 @@ def define_register(reg):
 memory = ['0000'] * 2048
 
 
-reached = 0 
+reached = 0
 for i in range(len(new_lines)):
     instruction = new_lines[i][0].lower()
     # index to the next byte if the instruction requires 2 words or more
@@ -199,19 +199,20 @@ for i in range(len(new_lines)):
         word_binary = no_operands[instruction]
 
     elif instruction in imidite.keys():
-        
-        word_binary =imidite[instruction]
+
+        word_binary = imidite[instruction]
         word = new_lines[i][1]
-        word= word.lower()
+        word = word.lower()
         word_binary += '00000'
         word_binary += define_register(word)
         word = new_lines[i][2]
-        memory[addresses[i]+counter] = str(ba2hex(int2ba(int(word), length=16, signed=False)))
+        memory[addresses[i] +
+               counter] = str(ba2hex(int2ba(int(word), length=16, signed=False)))
         try:
-            addresses[i+1] +=counter
-        except IndexError: 
+            addresses[i+1] += counter
+        except IndexError:
             pass
-    
+
     # 1 operand instructions
     elif instruction in operands_1.keys():
         word_binary = operands_1[instruction]
@@ -251,18 +252,12 @@ for i in range(len(new_lines)):
         word = word.lower()
         word_binary += '00000'
         word_binary += define_register(word)
-    
-    elif new_lines[i][0].lower() =='.org':
+
+    elif new_lines[i][0].lower() == '.org':
         add = new_lines[i][1]
         addresses[i] = new_lines[i][1]
         pass
-     # word_binary = int2ba(int(new_lines[i+1][0]))
-       
-     #  memory[int(add)]=str(ba2hex(word_binary))
-     #  try:
-     #      addresses[i+2] += counter
-     #  except IndexError: 
-     #      pass
+
     elif new_lines[i][0].isnumeric():
         word_binary = int2ba(int(new_lines[i][0]))
     else:
