@@ -2,7 +2,7 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
-ENTITY ram IS
+ENTITY instructions_ram IS
     PORT (
         rst : IN STD_LOGIC;
         clk : IN STD_LOGIC;
@@ -10,10 +10,10 @@ ENTITY ram IS
         DATAOUT : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
     );
 
-END ram;
+END instructions_ram;
 
-ARCHITECTURE RAM_ARCHITECTURE OF ram IS
-    TYPE ram_type IS ARRAY(0 TO 99999) OF STD_LOGIC_VECTOR(15 DOWNTO 0);
+ARCHITECTURE RAM_ARCHITECTURE OF instructions_ram IS
+    TYPE ram_type IS ARRAY(0 TO 1048575) OF STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL ram : ram_type;
 BEGIN
 

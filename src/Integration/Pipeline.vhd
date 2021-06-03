@@ -1,0 +1,207 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+
+ENTITY Pipeline IS
+    PORT (
+        CLK, RST : IN STD_LOGIC;
+    );
+END Pipeline;
+
+ARCHITECTURE arch OF Pipeline IS
+    COMPONENT Fetch IS
+        PORT (
+            RST : IN STD_LOGIC := '0';
+            CLK : IN STD_LOGIC;
+            JUMP : IN STD_LOGIC := '0';
+            BRANCH : IN STD_LOGIC := '0';
+            BRANCH_CONDITION : IN STD_LOGIC := '0';
+            RET : IN STD_LOGIC := '0';
+            IR_SIZE : IN STD_LOGIC := '0';
+            CONTROL_HAZARD : IN STD_LOGIC := '0';
+            DATA_HAZARD : IN STD_LOGIC := '0';
+            HLT : IN STD_LOGIC := '0';
+            RDST_DATA : IN STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '0');
+            MEM_DATA : IN STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '0');
+            IR : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            PC_OUT : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+        );
+    END COMPONENT;
+    COMPONENT Execution IS
+        PORT (
+            clk : IN STD_LOGIC;
+            Signals : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
+            Opcode : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+            RdstAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+            RsrcAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+            RdstData : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            RsrcData : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            InData : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            Immediate : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            ---From EX/MEM Buffer
+            AluDataForwarded : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            AluRdstAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+            RegWriteAlu, MemToRegAlu : IN STD_LOGIC;
+            ---From EX/MEM Buffer
+            MemDataForwarded : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            MemRdstAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+            RegWriteMem, MemToRegMem : IN STD_LOGIC;
+            Sp : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+            MemDataIn : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            AluDataOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            SpOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            Flags : INOUT STD_LOGIC_VECTOR(2 DOWNTO 0) := "000"
+        );
+    END COMPONENT;
+    COMPONENT MemoryStage IS
+        PORT (
+            CLK : IN STD_LOGIC;
+            MEM_DATA : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            PC : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            OPcode : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+            ALU_DATA : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            SP_SIGNAL : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+            SP : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            MEMEORY_READ : IN STD_LOGIC;
+            MEMEORY_WRITE : IN STD_LOGIC;
+            MEM_DATA_OUT : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+        );
+    END COMPONENT;
+    COMPONENT WriteStage IS
+        PORT (
+            ALU_DATA : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            MEM_DATA_OUT : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            MEM_TO_REG : IN STD_LOGIC;
+            WriteBackData : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+        );
+    END COMPONENT;
+    COMPONENT IFID IS
+        PORT (
+            enable : IN STD_LOGIC;
+            clk : IN STD_LOGIC;
+            IR_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            PC_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            IR : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            PC : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+
+        );
+    END COMPONENT;
+    COMPONENT IDEX IS
+        PORT (
+            enable : IN STD_LOGIC;
+            clk : IN STD_LOGIC;
+            SIGNALS_IN : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
+            OPCODE_IN : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+            Rdst_Address_IN : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+            Rsrc_Address_IN : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+            PC_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            Rsrc_DATA_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            Rdst_DATA_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            IN_PORT_DATA_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            IMMEDIATE_DATA_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            SIGNALS : OUT STD_LOGIC_VECTOR(12 DOWNTO 0);
+            OPCODE : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
+            Rdst_Address : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+            Rsrc_Address : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+            PC : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            Rsrc_DATA : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            Rdst_DATA : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            IN_PORT_DATA : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            IMMEDIATE_DATA : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+
+        );
+    END COMPONENT;
+    COMPONENT EXMEM IS
+        PORT (
+            enable : IN STD_LOGIC;
+            clk : IN STD_LOGIC;
+            SIGNALS_IN : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
+            OPCODE_IN : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+            Rdst_Address_IN : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+            PC_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            MEMORY_DATA_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            ALU_DATA_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            SP_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            SIGNALS : OUT STD_LOGIC_VECTOR(12 DOWNTO 0);
+            OPCODE : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
+            Rdst_Address : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+            PC : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            MEMORY_DATA : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            ALU_DATA : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            SP : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+        );
+    END COMPONENT;
+    COMPONENT MEMWB IS
+        PORT (
+            enable : IN STD_LOGIC;
+            clk : IN STD_LOGIC;
+            SIGNALS_IN : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
+            Rdst_Address_IN : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+            MEMORY_DATAOUT_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            ALU_DATAOUT_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            SP_IN : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            SIGNALS : OUT STD_LOGIC_VECTOR(12 DOWNTO 0);
+            Rdst_Address : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+            MEMORY_DATAOUT : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            ALU_DATAOUT : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            SP : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+
+        );
+    END COMPONENT;
+
+    SIGNAL JUMP : STD_LOGIC; --FROM EX/MEM--
+    SIGNAL BRANCH : STD_LOGIC; -- FROM EX/MEM --
+    SIGNAL BRANCH_CONDITION : STD_LOGIC; -- FROM EX/MEM --
+    SIGNAL RET : STD_LOGIC := ''0'; -- ZERO --
+    SIGNAL IR_SIZE : STD_LOGIC; -- FROM ID/EX (OUTPUT FROM DECODE STAGE) --
+    SIGNAL CONTROL_HAZARD : STD_LOGIC; -- FROM ID/EX (OUTPUT FROM DECODE STAGE) --
+    SIGNAL DATA_HAZARD : STD_LOGIC; -- FROM ID/EX (OUTPUT FROM DECODE STAGE) --
+    SIGNAL HLT : STD_LOGIC; --FROM ID/EX (OUTPUT FROM DECODE STAGE)--
+    SIGNAL RDST_DATA : STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '0'); -- FROM EX/MEM (OUTPUT FROM EXECUTE STAGE - FORWARDING UNIT) -- 
+    SIGNAL MEM_DATA : STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '0'); -- FROM  (OUTPUT FROM WRITEBACK STAGE - MEMDATA) -- 
+    SIGNAL IR_FETCH : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL PC_FETCH : STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+    SIGNAL IFID_BUFFER_ENABLE : STD_LOGIC;
+
+    --out of buffer IF/ID--
+    SIGNAL IR : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL PC : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    --out of buffer IF/ID--
+
+    --FROM ID/EX--
+    SIGNAL SIGNALS : STD_LOGIC_VECTOR(12 DOWNTO 0);
+    SIGNAL OPCODE_IDEX : STD_LOGIC_VECTOR(5 DOWNTO 0);
+    SIGNAL RdstAddress : STD_LOGIC_VECTOR(2 DOWNTO 0);
+    SIGNAL RsrcAddress : STD_LOGIC_VECTOR(2 DOWNTO 0);
+    SIGNAL RdstData : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL RsrcData : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL InData : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL Immediate : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    -- FROM ID/EX --
+
+    ---From EX/MEM Buffer
+    SIGNAL AluDataForwarded : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL AluRdstAddress : STD_LOGIC_VECTOR(2 DOWNTO 0);
+    SIGNAL RegWriteAlu, MemToRegAlu : STD_LOGIC;
+
+    ---From MEM/WB Buffer
+    SIGNAL MemDataForwarded : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL MemRdstAddress : STD_LOGIC_VECTOR(2 DOWNTO 0);
+    SIGNAL RegWriteMem, MemToRegMem : STD_LOGIC;
+    SIGNAL Sp : STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+    SIGNAL MemDataIn : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL AluDataOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL SpOut : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL Flags : STD_LOGIC_VECTOR(2 DOWNTO 0) := "000"
+
+BEGIN
+
+    Fetch_Stage : Fetch PORT MAP(RST, CLK, JUMP, BRANCH, BRANCH_CONDITION, RET, IR_SIZE, CONTROL_HAZARD, DATA_HAZARD, HLT, RDST_DATA, MEM_DATA, IR_FETCH, PC_FETCH);
+    IFID_BUFFER : IFID PORT MAP(IFID_BUFFER_ENABLE, CLK, IR_FETCH, PC_FETCH, IR, PC);
+    Execution_Stage : Execution PORT MAP(CLK, SIGNALS, OPCODE_IDEX, RdstAddress, RsrcAddress, RdstData, RsrcData, InData, Immediate, AluDataForwarded, AluRdstAddress, RegWriteAlu, MemToRegAlu, MemDataForwarded, MemRdstAddress, RegWriteMem, MemToRegMem, Sp, MemDataIn, AluDataOut, SpOut, Flags);
+
+
+END ARCHITECTURE;
