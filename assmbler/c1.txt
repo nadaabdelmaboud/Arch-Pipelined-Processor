@@ -1,7 +1,6 @@
-.org 1
-10
-iadd R0 ,1000
-nop
+iadd r1 ,10
 setc
-
-
+mov r1 ,r3
+setc
+mov r1 ,r3
+setc

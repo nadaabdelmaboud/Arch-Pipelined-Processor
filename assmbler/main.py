@@ -21,7 +21,7 @@ new_lines = []
 addresses = []
 labels = {}
 reserved_words = ['nop', 'setc', 'clrc', 'mov', 'add', 'sub', 'and', 'or', 'clr', 'not', 'inc', 'dec', 'neg', 'rlc', 'rrc', 'jz', 'jn', 'jc', 'jmp', 'out', 'in', 'iadd',
-                  'shl', 'shr', 'ldm', 'ldd', 'std', 'call', 'ret', 'push', 'pop', 'org']
+                  'shl', 'shr', 'ldm', 'ldd', 'std', 'call', 'ret', 'push', 'pop']
 for line in lines:
 
     # remove trailing whitespaces
@@ -40,8 +40,8 @@ for line in lines:
     line = " ".join(line.replace(",", " ").split())
 
     # updating current address
-    if(re.search(".=", line)):
-        current_address = int(line.replace('=', " ").split()[1])
+    if(re.search(".org", line)):
+        current_address = int(line.split()[1])
         continue
 
     # defining labels addresses
@@ -56,19 +56,18 @@ for line in lines:
     line = line.split()
     current_address += 1
     for i in range(0, len(line)):
-        if line[i].lower() == 'define':
-            labels[line[i+1]] = current_address
-            break
-        elif line[i][0].lower() == 'b':
+        if line[i][0].lower() == 'b':
             # to avoid occupying an extra word for branch instructions
             break
-        elif((re.search(r"(#(?=[0-9]))", line[i]) and (i == 1)) or  # (#(?=[0-9])) -> immadiate mode
-             (re.search(r"([0-9]+\([rR][0-7]\))", line[i])) or
-             # ([jJ][sS][rR]) -> JSR instruction
-             (re.search(r"([jJ][sS][rR])", line[i])) or
-             (re.search(r"((?![rR][0-7])[a-zA-Z])", line[i]) and (line[i].lower() not in reserved_words))):  # ((?![rR][0-7])[a-zA-Z]) -> relative mode
+        elif(re.search("")):
+            
+        # elif((re.search(r"(?=[0-9])", line[i]) and (i == 1)) or  # (#(?=[0-9])) -> immadiate mode
+        #      # (re.search(r"([0-9]+\([rR][0-7]\))", line[i])) or # ([jJ][sS][rR]) -> JSR instruction
+        #      # (re.search(r"([jJ][sS][rR])", line[i])) or
+        #      (re.search(r"((?![rR][0-7])[a-zA-Z])", line[i]) and 
+        #      (line[i].lower() not in reserved_words))):  # ((?![rR][0-7])[a-zA-Z]) -> relative mode
             current_address += 1
-
+     
     # new_lines array contains actual code lines
     # without comments and labels
     if line[i].lower() != 'define':
@@ -206,8 +205,7 @@ for i in range(len(new_lines)):
         word_binary += '00000'
         word_binary += define_register(word)
         word = new_lines[i][2]
-        memory[addresses[i] +
-               counter] = str(ba2hex(int2ba(int(word), length=16, signed=False)))
+        memory[addresses[i] +counter] = str(ba2hex(int2ba(int(word), length=16, signed=False)))
         try:
             addresses[i+1] += counter
         except IndexError:
@@ -253,13 +251,6 @@ for i in range(len(new_lines)):
         word_binary += '00000'
         word_binary += define_register(word)
 
-    elif new_lines[i][0].lower() == '.org':
-        add = new_lines[i][1]
-        addresses[i] = new_lines[i][1]
-        pass
-
-    elif new_lines[i][0].isnumeric():
-        word_binary = int2ba(int(new_lines[i][0]))
     else:
         raise Exception("Invalid syntax")
     memory[addresses[i]] = str(ba2hex(bitarray(word_binary)))
