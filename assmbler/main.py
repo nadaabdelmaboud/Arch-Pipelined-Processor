@@ -65,12 +65,12 @@ imidite = {
     'shl': '010001',
     'shr': '010010',
     'ldm': '010011'
-    
+
 }
 memImid = {
     'ldd': '010100',
     'std': '010101'
-    }
+}
 # done
 inOrOut = {
     # no operands
@@ -127,7 +127,7 @@ for line in lines:
 
     # updating current address
     if(re.search(r".[oO][rR][gG]", line)):
-        current_address = int(line.split()[1],base=16)
+        current_address = int(line.split()[1], base=16)
         continue
 
     addresses.append(current_address)
@@ -139,10 +139,10 @@ for line in lines:
         current_address += 1
     # new_lines array contains actual code lines
     # without comments and labels
-    
+
     new_lines.append(line)
-    
-  
+
+
 # ===============================
 # ========  SECOND PASS  ========
 # ===============================
@@ -193,9 +193,14 @@ for i in range(len(new_lines)):
         word_binary += define_register(word)
         word_binary += define_register(word)
         word = new_lines[i][2]
+<<<<<<< HEAD
         memory[addresses[i] +counter] = str(ba2hex(bitarray(int2ba(int(word,base=16), length=16))))
         word_binary += '0000'
         print(word_binary)
+=======
+        memory[addresses[i] +
+               counter] = str(ba2hex(bitarray(int2ba(int(word, base=16), length=16))))
+>>>>>>> 769efd589a0443732316d697ddafae64b620f65c
 
     # 1 operand instructions
     elif instruction in operands_1.keys():
@@ -246,6 +251,7 @@ for i in range(len(new_lines)):
         word = new_lines[i][1]
         word = word.lower()
         word_binary += define_register(word)
+<<<<<<< HEAD
         word_binary += define_register(word)
         word_binary += '0000'
         print(word_binary)
@@ -266,6 +272,25 @@ for i in range(len(new_lines)):
     
     elif instruction.isnumeric():
         word_binary = int2ba(int(new_lines[i][0],base=16), length=16)
+=======
+
+    elif instruction in memImid.keys():
+        e = "error here stack"
+        word_binary = memImid[instruction]
+        word = new_lines[i][1].lower()
+        word_binary += define_register(word)
+        secWord = new_lines[i][2].lower()
+        ina = secWord.find("(")
+        value = secWord[0:ina]
+        reg2 = secWord[ina+1:len(secWord)-1]
+        word_binary += define_register(reg2)
+        memory[addresses[i] +
+               counter] = str(ba2hex(bitarray(int2ba(int(value, base=16), length=16))))
+
+    elif instruction.isnumeric():
+        word_binary = int2ba(int(new_lines[i][0], base=16), length=16)
+
+>>>>>>> 769efd589a0443732316d697ddafae64b620f65c
     else:
         print(instruction)
         raise Exception("Invalid syntax")

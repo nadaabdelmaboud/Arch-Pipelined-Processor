@@ -21,7 +21,7 @@ ENTITY Fetch IS
 END Fetch;
 
 ARCHITECTURE Fetch_ARCHITECTURE OF Fetch IS
-    COMPONENT ram IS
+    COMPONENT instructions_ram IS
         PORT (
             rst : IN STD_LOGIC;
             clk : IN STD_LOGIC;
@@ -82,5 +82,5 @@ BEGIN
         END IF;
     END PROCESS;
 
-    ram_component : ram PORT MAP(rst, clk, PC, RAM_OUT);
+    ram_component : instructions_ram PORT MAP(rst, clk, PC, RAM_OUT);
 END Fetch_ARCHITECTURE;

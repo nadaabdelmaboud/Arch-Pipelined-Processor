@@ -1,24 +1,47 @@
-library ieee ;
-    use ieee.std_logic_1164.all ;
-    use ieee.numeric_std.all ;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity MemoryStage is
-    GENERIC(n: INTEGER := 16);
-  port (
-    clk,SPsignal,enableMux: In std_logic;
-    Pc,DataMemoryIn,Opcode,AluData,SP :IN std_logic_vector(n-1:0)
-    Data : out std_logic_vector(n-1 : 0);
-  ) ;
-end MemoryStage ; 
+ENTITY MemoryStage IS
+  PORT (
+    CLK : IN STD_LOGIC;
+    MEM_DATA : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    PC : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    OPcode : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
+    ALU_DATA : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SP_SIGNAL : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+    SP : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    MEMEORY_READ : IN STD_LOGIC;
+    MEMEORY_WRITE : IN STD_LOGIC;
+    MEM_DATA_OUT : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+  );
+END MemoryStage;
 
-architecture arch of MemoryStage is
-signal memoryAdress,memoryData : std_logic_vector(n-1 downto 0);
-begin
-    process(clk)
-    begin
-        -- TODO :: make PcRead , SpAddress
-        M1 : entity work.Mux  generic map(n) port map(clk,enableMux,Opcode,Pc,DataMemoryIn,memoryData);
-        M2 : entity work.Mux  generic map(n) port map(clk,enableMux,SPsignal,AluData,SP,memoryAdress);
-        Memo : entity work.ram generic map(n) port map(clk,MemoryRead,MemoryWrite,memoryAddress,memoryData,Data);
-    end process;
-end architecture ;
+ARCHITECTURE arch OF MemoryStage IS
+  COMPONENT ram IS
+    PORT (
+      clk : IN STD_LOGIC;
+      MemoryWrite : IN STD_LOGIC;
+      MemoryRead : IN STD_LOGIC;
+      address : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      datain : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      dataout : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+  END COMPONENT;
+  SIGNAL MEMORY_DATA_IN : STD_LOGIC_VECTOR(31 DOWNTO 0);
+  SIGNAL MEMORY_ADDRESS : STD_LOGIC_VECTOR(31 DOWNTO 0);
+  SIGNAL PC_READ : STD_LOGIC;
+BEGIN
+  PC_READ <= '1' WHEN OPcode = "101000"
+    ELSE
+    '0';
+  MEMORY_DATA_IN <= MEM_DATA WHEN PC_READ = '0'
+    ELSE
+    PC WHEN PC_READ = '1';
+
+  MEMORY_ADDRESS <= SP WHEN SP_SIGNAL /= "00"
+    ELSE
+    ALU_DATA;
+
+  ram_component : ram PORT MAP(clk, MEMEORY_WRITE, MEMEORY_READ, MEMORY_ADDRESS, MEMORY_DATA_IN, MEM_DATA_OUT);
+
+END ARCHITECTURE;
