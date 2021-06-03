@@ -1,6 +1,4 @@
-iadd r1 ,10
-setc
-mov r1 ,r3
-setc
-mov r1 ,r3
-setc
+.org 1
+10
+.org 2
+mov r1,r2
