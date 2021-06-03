@@ -1,9 +1,9 @@
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
-ENTITY DecodingStatge IS
+ENTITY DecodingStage IS
     PORT (
 
-        IR_D : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        IR_D : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
         --------to register fie-------------------
         Clk_D : IN STD_LOGIC;
         Rest_D : IN STD_LOGIC;
@@ -28,13 +28,13 @@ ENTITY DecodingStatge IS
         --------------------------------------------
         CONTROL_HAZARD_D : OUT STD_LOGIC := '0';
         DATA_HAZARD_D : OUT STD_LOGIC := '0';
-        HAZARD : OUT STD_LOGIC := '0'
+        HAZARD_OUT : OUT STD_LOGIC := '0'
 
     );
 
-END DecodingStatge;
+END DecodingStage;
 
-ARCHITECTURE a_DecodingStatge OF DecodingStatge IS
+ARCHITECTURE a_DecodingStatge OF DecodingStage IS
 
     COMPONENT RegisterFile IS
         PORT (
@@ -97,14 +97,14 @@ ARCHITECTURE a_DecodingStatge OF DecodingStatge IS
 
 BEGIN
 
-    Registerfile_COMPONENT : RegisterFile PORT MAP(IR_D, Clk_D, Rest_D, RegisterWrite_D, RdstAddress_D, WriteData_D, Register1Data_D, Register2Data_D);
-    SignExtend_COMPONENT : SignExtend PORT MAP(IR_D, ImmediateData_D);
-    ControlUnit_COMPONENT : ControlUnit PORT MAP(IR_D, SignalsfromcontrolUnit);
-    HAZARD_COMPONENT : HAZARD PORT MAP(IR_D(6 DOWNTO 4), IR_D(9 DOWNTO 7), RDST_IDEX_D, MEM_READ_IDEX_D, BRANCH_CONDITION_D, BRANCH_D, JUMP_D, CONTROL_HAZARDSignal, DATA_HAZARDSignal);
+    Registerfile_COMPONENT : RegisterFile PORT MAP(IR_D(31 DOWNTO 16), Clk_D, Rest_D, RegisterWrite_D, RdstAddress_D, WriteData_D, Register1Data_D, Register2Data_D);
+    SignExtend_COMPONENT : SignExtend PORT MAP(IR_D(15 DOWNTO 0), ImmediateData_D);
+    ControlUnit_COMPONENT : ControlUnit PORT MAP(IR_D(31 DOWNTO 16), SignalsfromcontrolUnit);
+    HAZARD_COMPONENT : HAZARD PORT MAP(IR_D(22 DOWNTO 20), IR_D(25 DOWNTO 23), RDST_IDEX_D, MEM_READ_IDEX_D, BRANCH_CONDITION_D, BRANCH_D, JUMP_D, CONTROL_HAZARDSignal, DATA_HAZARDSignal);
     MuxSignals_COMPONENT : MuxSignals PORT MAP(SignalsfromcontrolUnit, CONTROL_HAZARDSignal, DATA_HAZARDSignal, ControlSignals_D);
 
     CONTROL_HAZARD_D <= CONTROL_HAZARDSignal;
     DATA_HAZARD_D <= DATA_HAZARDSignal;
-    HAZARD <= CONTROL_HAZARDSignal OR DATA_HAZARDSignal;
+    HAZARD_OUT <= CONTROL_HAZARDSignal OR DATA_HAZARDSignal;
 
 END a_DecodingStatge;

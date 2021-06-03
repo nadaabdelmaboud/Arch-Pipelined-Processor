@@ -207,7 +207,7 @@ for i in range(len(new_lines)):
         word_binary += define_register(word)
         word = new_lines[i][2]
         memory[addresses[i] +
-               
+
                counter] = str(ba2hex(int2ba(int(word), length=16, signed=False)))
         try:
             addresses[i+1] += counter
@@ -270,4 +270,4 @@ with open('memory.mem', 'w') as f:
     f.write("// instance=/ram/ram\n")
     f.write("// format=mti addressradix=d dataradix=h version=1.0 wordsperline=1\n")
     for i, item in enumerate(memory):
-        f.write("%d: %s\n" % (i, item))
+        f.write("%s\n" % (item))

@@ -65,12 +65,12 @@ imidite = {
     'shl': '010001',
     'shr': '010010',
     'ldm': '010011'
-    
+
 }
 memImid = {
     'ldd': '010100',
     'std': '010101'
-    }
+}
 # done
 inOrOut = {
     # no operands
@@ -127,7 +127,7 @@ for line in lines:
 
     # updating current address
     if(re.search(r".[oO][rR][gG]", line)):
-        current_address = int(line.split()[1],base=16)
+        current_address = int(line.split()[1], base=16)
         continue
 
     addresses.append(current_address)
@@ -139,10 +139,10 @@ for line in lines:
         current_address += 1
     # new_lines array contains actual code lines
     # without comments and labels
-    
+
     new_lines.append(line)
-    
-  
+
+
 # ===============================
 # ========  SECOND PASS  ========
 # ===============================
@@ -193,8 +193,8 @@ for i in range(len(new_lines)):
         word_binary += '00000'
         word_binary += define_register(word)
         word = new_lines[i][2]
-        memory[addresses[i] +counter] = str(ba2hex(bitarray(int2ba(int(word,base=16), length=16))))
-        
+        memory[addresses[i] +
+               counter] = str(ba2hex(bitarray(int2ba(int(word, base=16), length=16))))
 
     # 1 operand instructions
     elif instruction in operands_1.keys():
@@ -240,22 +240,22 @@ for i in range(len(new_lines)):
         word = word.lower()
         word_binary += '00000'
         word_binary += define_register(word)
-        
-    elif instruction in memImid.keys():
-         e = "error here stack"
-         word_binary = memImid[instruction]
-         word = new_lines[i][1].lower()
-         word_binary += define_register(word)
-         secWord = new_lines[i][2].lower()
-         ina  = secWord.find("(")
-         value = secWord[0:ina]
-         reg2 = secWord[ina+1:len(secWord)-1]
-         word_binary += define_register(reg2)
-         memory[addresses[i]+counter] = str(ba2hex(bitarray(int2ba(int(value,base=16), length=16))))
 
-    
+    elif instruction in memImid.keys():
+        e = "error here stack"
+        word_binary = memImid[instruction]
+        word = new_lines[i][1].lower()
+        word_binary += define_register(word)
+        secWord = new_lines[i][2].lower()
+        ina = secWord.find("(")
+        value = secWord[0:ina]
+        reg2 = secWord[ina+1:len(secWord)-1]
+        word_binary += define_register(reg2)
+        memory[addresses[i] +
+               counter] = str(ba2hex(bitarray(int2ba(int(value, base=16), length=16))))
+
     elif instruction.isnumeric():
-        word_binary = int2ba(int(new_lines[i][0],base=16), length=16)
+        word_binary = int2ba(int(new_lines[i][0], base=16), length=16)
 
     else:
         print(instruction)
@@ -267,4 +267,4 @@ with open('memory.mem', 'w') as f:
     f.write("// instance=/ram/ram\n")
     f.write("// format=mti addressradix=d dataradix=h version=1.0 wordsperline=1\n")
     for i, item in enumerate(memory):
-        f.write("%d: %s\n" % (i, item))
+        f.write("%s\n" % (item))
