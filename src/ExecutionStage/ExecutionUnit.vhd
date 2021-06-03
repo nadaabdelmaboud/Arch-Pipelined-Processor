@@ -4,7 +4,7 @@ USE IEEE.NUMERIC_STD.ALL;
 ENTITY Execution IS
 	PORT (
 		clk : IN STD_LOGIC;
-		Signals : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
+		Signals : IN STD_LOGIC_VECTOR(13 DOWNTO 0);
 		Opcode : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
 		RdstAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
 		RsrcAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -19,7 +19,7 @@ ENTITY Execution IS
 		---From EX/MEM Buffer
 		MemDataForwarded : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
 		MemRdstAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-		RegWriteMem, MemToRegMem : IN STD_LOGIC;
+		MemToRegMem : IN STD_LOGIC;
 		Sp : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 		MemDataIn : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -50,7 +50,7 @@ ARCHITECTURE ExecutionUnit_Arch OF Execution IS
 	COMPONENT ForwardingUnit IS
 		PORT (
 			Rdst, Rsrc, RdstAlu, RdstMem : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-			RegWriteAlu, MemToRegAlu, RegWriteMem, MemToRegMem : IN STD_LOGIC;
+			RegWriteAlu, MemToRegAlu, MemToRegMem : IN STD_LOGIC;
 			SrcSelector, DstSelector : OUT STD_LOGIC_VECTOR(1 DOWNTO 0)
 		);
 	END COMPONENT;
@@ -71,17 +71,16 @@ BEGIN
 
 	ForwardingUnit1 : ForwardingUnit PORT MAP(
 		RdstAddress, RsrcAddress, AluRdstAddress, MemRdstAddress,
-		RegWriteAlu, MemToRegAlu, RegWriteMem, MemToRegMem,
+		RegWriteAlu, MemToRegAlu, MemToRegMem,
 		SrcSelector, DstSelector);
 
 	-------------------LOGIC------------------------------
-	MemDataIn <= DstMuxOut;
 
-	SrcData <= INDATA WHEN Signals(7) = '1' --IN Signal
+	SrcData <= INDATA WHEN Signals(6) = '1' --IN Signal
 		ELSE
 		RsrcData;
 
-	DstData <= Immediate WHEN Signals(6) = '1' --ALU Src Signal
+	DstData <= Immediate WHEN Signals(7) = '1' --ALU Src Signal
 		ELSE
 		RdstData;
 
@@ -92,6 +91,12 @@ BEGIN
 		MemDataForwarded WHEN SrcSelector = "10";
 
 	DstMuxOut <= DstData WHEN DstSelector = "00"
+		ELSE
+		AluDataForwarded WHEN DstSelector = "01"
+		ELSE
+		MemDataForwarded WHEN DstSelector = "10";
+
+	MemDataIn <= RdstData WHEN DstSelector = "00"
 		ELSE
 		AluDataForwarded WHEN DstSelector = "01"
 		ELSE
