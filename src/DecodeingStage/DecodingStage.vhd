@@ -24,8 +24,10 @@ ENTITY DecodingStatge IS
 		  ----------------------------------------------
 		  ControlSignals_D : OUT std_logic_vector(13 DOWNTO 0);
 		  ---------------------------------------------
-		  ImmediateData_D : OUT std_logic_vector(31 DOWNTO 0)
-
+		  ImmediateData_D : OUT std_logic_vector(31 DOWNTO 0);
+		  --------------------------------------------
+          CONTROL_HAZARD_D : OUT STD_LOGIC := '0';
+          DATA_HAZARD_D : OUT STD_LOGIC := '0'
 		  
 		  );
 		
@@ -98,7 +100,8 @@ ControlUnit_COMPONENT:ControlUnit PORT MAP(IR_D,SignalsfromcontrolUnit);
 HAZARD_COMPONENT:HAZARD PORT MAP(IR_D(6 DOWNTO 4),IR_D(9 DOWNTO 7),RDST_IDEX_D,MEM_READ_IDEX_D,BRANCH_CONDITION_D,BRANCH_D,JUMP_D,CONTROL_HAZARDSignal,DATA_HAZARDSignal);
 MuxSignals_COMPONENT:MuxSignals PORT MAP(SignalsfromcontrolUnit,CONTROL_HAZARDSignal,DATA_HAZARDSignal,ControlSignals_D);
 
-
+  CONTROL_HAZARD_D <= CONTROL_HAZARDSignal;
+  DATA_HAZARD_D <= DATA_HAZARDSignal;
 
 
 
