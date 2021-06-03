@@ -98,14 +98,14 @@ stack = {
 }
 
 regs = {
-    'r0': '00000',
-    'r1': '00001',
-    'r2': '00010',
-    'r3': '00011',
-    'r4': '00100',
-    'r5': '00101',
-    'r6': '00110',
-    'r7': '00111',
+    'r0': '000',
+    'r1': '001',
+    'r2': '010',
+    'r3': '011',
+    'r4': '100',
+    'r5': '101',
+    'r6': '110',
+    'r7': '111',
 }
 
 for line in lines:
@@ -190,11 +190,12 @@ for i in range(len(new_lines)):
         word_binary = imidite[instruction]
         word = new_lines[i][1]
         word = word.lower()
-        word_binary += '00000'
+        word_binary += define_register(word)
         word_binary += define_register(word)
         word = new_lines[i][2]
         memory[addresses[i] +counter] = str(ba2hex(bitarray(int2ba(int(word,base=16), length=16))))
-        
+        word_binary += '0000'
+        print(word_binary)
 
     # 1 operand instructions
     elif instruction in operands_1.keys():
@@ -202,9 +203,10 @@ for i in range(len(new_lines)):
         word_binary = operands_1[instruction]
         word = new_lines[i][1]
         word = word.lower()
-        word_binary += '00000'
         word_binary += define_register(word)
-
+        word_binary += define_register(word)
+        word_binary += '0000'
+        print(word_binary)
     # 2 operands instructions
     elif instruction in operands_2.keys():
         e = "error here 2"
@@ -215,31 +217,38 @@ for i in range(len(new_lines)):
             word = word.lower()
             # register
             word_binary += define_register(word)
-
+        word_binary += '0000'
+        print(word_binary)
     # jump instructions
     elif instruction in jump.keys():
         e = "error here jump"
         word_binary = jump[instruction]
         word = new_lines[i][1]
         word = word.lower()
-        word_binary += '00000'
         word_binary += define_register(word)
+        word_binary += define_register(word)
+        word_binary += '0000'
+        print(word_binary)
     # In or out instructions
     elif instruction in inOrOut.keys():
         e = "error here inout"
         word_binary = inOrOut[instruction]
         word = new_lines[i][1]
         word = word.lower()
-        word_binary += '00000'
         word_binary += define_register(word)
+        word_binary += define_register(word)
+        word_binary += '0000'
+        print(word_binary)
     # stack instructions
     elif instruction in stack.keys():
         e = "error here stack"
         word_binary = stack[instruction]
         word = new_lines[i][1]
         word = word.lower()
-        word_binary += '00000'
         word_binary += define_register(word)
+        word_binary += define_register(word)
+        word_binary += '0000'
+        print(word_binary)
         
     elif instruction in memImid.keys():
          e = "error here stack"
@@ -252,11 +261,11 @@ for i in range(len(new_lines)):
          reg2 = secWord[ina+1:len(secWord)-1]
          word_binary += define_register(reg2)
          memory[addresses[i]+counter] = str(ba2hex(bitarray(int2ba(int(value,base=16), length=16))))
-
+         word_binary += '0000'
+         print(word_binary)
     
     elif instruction.isnumeric():
         word_binary = int2ba(int(new_lines[i][0],base=16), length=16)
-
     else:
         print(instruction)
         raise Exception("Invalid syntax")
@@ -264,7 +273,5 @@ for i in range(len(new_lines)):
 
 
 with open('memory.mem', 'w') as f:
-    f.write("// instance=/ram/ram\n")
-    f.write("// format=mti addressradix=d dataradix=h version=1.0 wordsperline=1\n")
     for i, item in enumerate(memory):
-        f.write("%d: %s\n" % (i, item))
+        f.write("%s\n" % (item))
