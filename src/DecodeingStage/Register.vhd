@@ -1,23 +1,30 @@
 LIBRARY IEEE;
-USE IEEE.std_logic_1164.ALL;
+USE IEEE.std_logic_1164.all;
 ENTITY Reg IS
-  GENERIC (n : INTEGER := 16);
-  PORT (
-    rst, enable : IN STD_LOGIC;
-    d : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
-    q : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0));
+Generic ( n : Integer:=32);
+    PORT( clk,rst,enable : IN std_logic;
+	    d: IN std_logic_vector(n-1 DOWNTO 0);
+      q : OUT std_logic_vector(n-1 DOWNTO 0));
 END Reg;
 
 ARCHITECTURE a_Reg OF Reg IS
-BEGIN
-  PROCESS (enable, rst)
+ SIGNAL storevalue : STD_LOGIC_VECTOR(n-1 DOWNTO 0);
   BEGIN
-    IF (enable = '0') THEN
-      NULL;
-    ELSIF (rst = '1') THEN
-      q <= (OTHERS => '0');
-    ELSE 
-      q <= d;
-    END IF;
-  END PROCESS;
+    PROCESS(clk,rst,enable)
+      BEGIN
+      IF(rst = '1') THEN
+        q <= (others => '0');
+        storevalue<=(others => '0');
+       ElSE 
+
+          IF(enable = '1') THEN
+          q <= d;
+          storevalue<=d;
+          ELSE
+            q <= storevalue;
+          END IF;
+          
+       END IF;
+
+    END PROCESS;
 END a_Reg;
