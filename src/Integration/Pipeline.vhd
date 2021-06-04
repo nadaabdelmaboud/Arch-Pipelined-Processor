@@ -213,7 +213,6 @@ ARCHITECTURE arch OF Pipeline IS
     SIGNAL PC : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL IN_PORT_DATA_IFID : STD_LOGIC_VECTOR(31 DOWNTO 0);
     ---------------------------------------Decode-----------------------------------
-    SIGNAL WriteData_WB : STD_LOGIC_VECTOR(31 DOWNTO 0); ----FROM WRITE DATA SIGNAL FROM WB STAGE----
 
     ------Input To ID/EX Buffer FROM DECODE STAGE
     SIGNAL Register1Data_D : STD_LOGIC_VECTOR(31 DOWNTO 0);
