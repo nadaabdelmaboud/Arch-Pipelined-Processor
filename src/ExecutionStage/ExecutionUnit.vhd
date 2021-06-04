@@ -60,9 +60,6 @@ ARCHITECTURE ExecutionUnit_Arch OF Execution IS
 	SIGNAL SrcMuxOut, DstMuxOut, AluData : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL FlagsAlu : STD_LOGIC_VECTOR(2 DOWNTO 0);
 	SIGNAL CarryOld : STD_LOGIC;
-
-	SIGNAL SrcData, DstData : STD_LOGIC_VECTOR(31 DOWNTO 0);
-
 BEGIN
 	-------------------PORTMAPS------------------------------
 	Alu1 : Alu PORT MAP(SrcMuxOut, DstMuxOut, AluSignal, CarryOld, clk, AluData, FlagsAlu);
@@ -76,21 +73,17 @@ BEGIN
 
 	-------------------LOGIC------------------------------
 
-	SrcData <= INDATA WHEN Signals(6) = '1' --IN Signal
+	SrcMuxOut <= INDATA WHEN Signals(6) = '1'
 		ELSE
-		RsrcData;
-
-	DstData <= Immediate WHEN Signals(7) = '1' --ALU Src Signal
-		ELSE
-		RdstData;
-
-	SrcMuxOut <= SrcData WHEN SrcSelector = "00"
+		RSrcData WHEN SrcSelector = "00"
 		ELSE
 		AluDataForwarded WHEN SrcSelector = "01"
 		ELSE
 		MemDataForwarded WHEN SrcSelector = "10";
 
-	DstMuxOut <= DstData WHEN DstSelector = "00"
+	DstMuxOut <= Immediate WHEN Signals(7) = '1'
+		ELSE
+		RdstData WHEN DstSelector = "00"
 		ELSE
 		AluDataForwarded WHEN DstSelector = "01"
 		ELSE

@@ -13,8 +13,8 @@ ENTITY instructions_ram IS
 END instructions_ram;
 
 ARCHITECTURE RAM_ARCHITECTURE OF instructions_ram IS
-    TYPE ram_type IS ARRAY(0 TO 1048575) OF STD_LOGIC_VECTOR(15 DOWNTO 0);
-    SIGNAL ram : ram_type;
+    TYPE ram_type IS ARRAY(0 TO 3000) OF STD_LOGIC_VECTOR(15 DOWNTO 0);
+    SIGNAL ram : ram_type := (OTHERS => (OTHERS => '0'));
 BEGIN
 
     DATAOUT <= ram(to_integer(unsigned(MAR))) & ram(to_integer(unsigned(MAR) + 1));
