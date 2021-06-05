@@ -39,8 +39,7 @@ ARCHITECTURE Alu_Arch OF Alu IS
 	SIGNAL CarryIn : STD_LOGIC;
 
 	SIGNAL OutTemp : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	SIGNAL ones : STD_LOGIC_VECTOR(31 DOWNTO 0):="11111111111111111111111111111111";
-	SIGNAL subcarry :  std_logic;
+	SIGNAL ones : STD_LOGIC_VECTOR(32 DOWNTO 0) := "111111111111111111111111111111111";
 
 BEGIN
 	addRes <= STD_LOGIC_VECTOR(unsigned('0' & Operand1) + unsigned('0' & Operand2)); --addition
@@ -67,7 +66,7 @@ BEGIN
 	incRes <= STD_LOGIC_VECTOR(unsigned('0' & Operand1) + 1); --INC
 	decRes <= STD_LOGIC_VECTOR(unsigned('0' & Operand1) - 1); --DEC
 
-	OutTemp <= addRes(31 DOWNTO 0) WHEN AluSignal = "00000"
+	OutTemp <= addRes(31 DOWNTO 0) WHEN AluSignal = "00000" OR AluSignal = "10010"
 		ELSE
 		subRes(31 DOWNTO 0) WHEN AluSignal = "00001"
 		ELSE
@@ -95,27 +94,17 @@ BEGIN
 		ELSE
 		incRes(31 DOWNTO 0) WHEN AluSignal = "01111"
 		ELSE
-		decRes(31 DOWNTO 0) WHEN AluSignal = "10000"
-		ELSE
-		"00000000000000000000000000000000";
+		decRes(31 DOWNTO 0) WHEN AluSignal = "10000";
 
 	AluOut <= OutTemp;
 
 	---Flags handling
 	---Zero Flag
-	Flags(0) <= '1' WHEN
-	OutTemp = 
-	"00000000000000000000000000000000" 
---MovA
-	AND AluSignal /= "01010" 
---MovB
-	AND AluSignal /= "01011" 
---NOP
-	AND AluSignal /= "10001"
---CLRC
---SETC
---LD/ST
-	ELSE '0';
+	--MovA--MovB--NOP--CLRC--SETC--LD/ST
+	Flags(0) <= '1' WHEN OutTemp = "00000000000000000000000000000000" AND AluSignal /= "01010" AND AluSignal /= "01011" AND AluSignal /= "10001"AND AluSignal /= "00100"AND AluSignal /= "00101"AND AluSignal /= "10010"
+ELSE
+	'0' WHEN OutTemp /= "00000000000000000000000000000000" AND AluSignal /= "01010" AND AluSignal /= "01011" AND AluSignal /= "10001"AND AluSignal /= "00100"AND AluSignal /= "00101"AND AluSignal /= "10010";
+
 	---Negative Flag
 	Flags(1) <= OutTemp(31) WHEN AluSignal /= "01011" AND AluSignal /= "10001";
 

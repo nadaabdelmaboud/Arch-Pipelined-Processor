@@ -42,9 +42,10 @@ ARCHITECTURE Fetch_ARCHITECTURE OF Fetch IS
     SIGNAL MEM_DATA_IN : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL READ_MEM : STD_LOGIC_VECTOR(1 DOWNTO 0) := "01";
     SIGNAL MEM_ZERO : STD_LOGIC_VECTOR(15 DOWNTO 0);
+
 BEGIN
 
-    IR <= NOP WHEN PC_ZERO = '1' OR CONTROL_HAZARD = '1' OR HLT = '1' OR RET = '1' OR RST = '1'
+    IR <= NOP WHEN PC_ZERO = '1' OR CONTROL_HAZARD = '1' OR HLT = '1' OR RET = '1'
         ELSE
         RAM_OUT;
 
@@ -56,7 +57,7 @@ BEGIN
     HAZARD <= CONTROL_HAZARD OR DATA_HAZARD OR HLT;
     JUMP_BRANCH <= JUMP OR (BRANCH AND BRANCH_CONDITION);
 
-    PC_SELECTOR <= "000" WHEN PC_ZERO = '0' AND JUMP_BRANCH = '0' AND HAZARD = '0' AND RET = '0' --16-BIT INSTRUCTION PC=PC+1-
+    PC_SELECTOR <= "000" WHEN PC_ZERO = '0' AND JUMP_BRANCH = '0' AND HAZARD = '0' AND RET = '0' AND IR_SIZE = '0' --16-BIT INSTRUCTION PC=PC+1-
         ELSE
         "001" WHEN PC_ZERO = '0' AND JUMP_BRANCH = '0' AND HAZARD = '0' AND RET = '0' AND IR_SIZE = '1' --32-BIT INSTRUCTION PC=PC+2-
         ELSE
@@ -69,16 +70,19 @@ BEGIN
         "101" WHEN PC_ZERO = '1'; --MEM[0]--
     PROCESS (CLK) IS
     BEGIN
-        IF PC_SELECTOR = "000" THEN
-            PC <= STD_LOGIC_VECTOR((unsigned(PC)) + 1);
-        ELSIF PC_SELECTOR = "001" THEN
-            PC <= STD_LOGIC_VECTOR((unsigned(PC)) + 2);
-        ELSIF PC_SELECTOR = "010" THEN
-            PC <= RDST_DATA;
-        ELSIF PC_SELECTOR = "100" THEN
-            PC <= MEM_DATA;
-        ELSIF PC_SELECTOR = "101" THEN
-            PC <= "0000000000000000" & MEM_ZERO;
+        IF (RISING_EDGE(CLK)) THEN
+
+            IF PC_SELECTOR = "000" THEN
+                PC <= STD_LOGIC_VECTOR((unsigned(PC)) + 1);
+            ELSIF PC_SELECTOR = "001" THEN
+                PC <= STD_LOGIC_VECTOR((unsigned(PC)) + 2);
+            ELSIF PC_SELECTOR = "010" THEN
+                PC <= RDST_DATA;
+            ELSIF PC_SELECTOR = "100" THEN
+                PC <= MEM_DATA;
+            ELSIF PC_SELECTOR = "101" THEN
+                PC <= "0000000000000000" & MEM_ZERO;
+            END IF;
         END IF;
     END PROCESS;
 

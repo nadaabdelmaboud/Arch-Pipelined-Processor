@@ -18,6 +18,6 @@ ARCHITECTURE RAM_ARCHITECTURE OF instructions_ram IS
     SIGNAL ram : ram_type := (OTHERS => (OTHERS => '0'));
 BEGIN
 
-    DATAOUT <= ram(to_integer(unsigned(MAR))) & ram(to_integer(unsigned(MAR) + 1));
+    DATAOUT <= ram(to_integer(unsigned(MAR))) & ram(to_integer(unsigned(MAR) + 1)) WHEN (to_integer(unsigned(MAR)) < 3000);
     MEM_ZERO <= ram(0);
 END RAM_ARCHITECTURE;
