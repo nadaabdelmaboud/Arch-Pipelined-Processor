@@ -5,9 +5,10 @@ USE IEEE.numeric_std.ALL;
 ENTITY instructions_ram IS
     PORT (
         rst : IN STD_LOGIC;
-        clk : IN STD_LOGIC;
-        MAR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-        DATAOUT : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+            clk : IN STD_LOGIC;
+            MAR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            DATAOUT : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+	    MEM_ZERO : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
     );
 
 END instructions_ram;
@@ -18,4 +19,5 @@ ARCHITECTURE RAM_ARCHITECTURE OF instructions_ram IS
 BEGIN
 
     DATAOUT <= ram(to_integer(unsigned(MAR))) & ram(to_integer(unsigned(MAR) + 1));
+   MEM_ZERO <= ram(0);
 END RAM_ARCHITECTURE;

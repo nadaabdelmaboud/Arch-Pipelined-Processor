@@ -3,7 +3,7 @@ USE IEEE.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 ENTITY Fetch IS
     PORT (
-        RST : IN STD_LOGIC := '0';
+        RST : IN STD_LOGIC := '1';
         CLK : IN STD_LOGIC;
         JUMP : IN STD_LOGIC := '0';
         BRANCH : IN STD_LOGIC := '0';
@@ -26,7 +26,8 @@ ARCHITECTURE Fetch_ARCHITECTURE OF Fetch IS
             rst : IN STD_LOGIC;
             clk : IN STD_LOGIC;
             MAR : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            DATAOUT : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+            DATAOUT : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+	    MEM_ZERO : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
         );
 
     END COMPONENT;
@@ -40,9 +41,10 @@ ARCHITECTURE Fetch_ARCHITECTURE OF Fetch IS
     SIGNAL NOP : STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '0');
     SIGNAL MEM_DATA_IN : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL READ_MEM : STD_LOGIC_VECTOR(1 DOWNTO 0) := "01";
+    SIGNAL MEM_ZERO :  STD_LOGIC_VECTOR(15 DOWNTO 0);
 BEGIN
 
-    IR <= NOP WHEN PC_ZERO = '1' OR CONTROL_HAZARD = '1' OR HLT = '1' OR RET = '1'
+    IR <= NOP WHEN PC_ZERO = '1' OR CONTROL_HAZARD = '1' OR HLT = '1' OR RET = '1' OR RST='1'
         ELSE
         RAM_OUT;
 
@@ -65,22 +67,14 @@ BEGIN
         "100" WHEN PC_ZERO = '0' AND RET = '1' --MEM DATA --
         ELSE
         "101" WHEN PC_ZERO = '1'; --MEM[0]--
-    PROCESS (CLK) IS
-    BEGIN
-        IF rising_edge(CLK) THEN
-            IF PC_SELECTOR = "000" THEN
-                PC <= STD_LOGIC_VECTOR((unsigned(PC)) + 1);
-            ELSIF PC_SELECTOR = "001" THEN
-                PC <= STD_LOGIC_VECTOR((unsigned(PC)) + 2);
-            ELSIF PC_SELECTOR = "010" THEN
-                PC <= RDST_DATA;
-            ELSIF PC_SELECTOR = "100" THEN
-                PC <= MEM_DATA;
-            ELSIF PC_SELECTOR = "101" THEN
-                PC <= "0000000000000000" & RAM_OUT(31 DOWNTO 16);
-            END IF;
-        END IF;
-    END PROCESS;
 
-    ram_component : instructions_ram PORT MAP(rst, clk, PC, RAM_OUT);
+
+    PC <= STD_LOGIC_VECTOR((unsigned(PC)) + 1) WHEN PC_SELECTOR = "000"
+    ELSE STD_LOGIC_VECTOR((unsigned(PC)) + 2) WHEN PC_SELECTOR = "001"
+    ELSE RDST_DATA WHEN PC_SELECTOR = "010"
+    ELSE MEM_DATA WHEN PC_SELECTOR = "100"
+    ELSE "0000000000000000" & MEM_ZERO WHEN PC_SELECTOR = "101";
+
+ 
+    ram_component : instructions_ram PORT MAP(rst, clk, PC, RAM_OUT,MEM_ZERO);
 END Fetch_ARCHITECTURE;

@@ -9,8 +9,10 @@ END AluController;
 
 ARCHITECTURE AluController_Arch OF AluController IS
   BEGIN
-	---Add---
-	AluSignal <= "00000" WHEN Opcode = "000100" or Opcode = "010000" or Opcode = "010100" or Opcode = "010101"
+	---Add-IADD---
+	AluSignal <= "00000" WHEN Opcode = "000100" or Opcode = "010000" 
+	---LDD-LDM---PERFORMS ADD DOESNOT CHANGE FLAGS
+	ELSE "10010" WHEN Opcode = "010100" or Opcode = "010101"
 	---SUB---
 	ELSE "00001" WHEN Opcode = "000101"
 	---NOT---
