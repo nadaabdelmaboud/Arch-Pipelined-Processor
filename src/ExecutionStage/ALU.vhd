@@ -39,11 +39,12 @@ ARCHITECTURE Alu_Arch OF Alu IS
 	SIGNAL CarryIn : STD_LOGIC;
 
 	SIGNAL OutTemp : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	--SIGNAL subcarry :  std_logic;
+	SIGNAL ones : STD_LOGIC_VECTOR(31 DOWNTO 0):="11111111111111111111111111111111";
+	SIGNAL subcarry :  std_logic;
 
 BEGIN
-	addRes <= STD_LOGIC_VECTOR(signed('0' & Operand1) + signed('0' & Operand2)); --addition
-	subRes <= STD_LOGIC_VECTOR(signed('0' & Operand2) - signed('0' & Operand1)); --subtraction Rsrc - Rdst
+	addRes <= STD_LOGIC_VECTOR(unsigned('0' & Operand1) + unsigned('0' & Operand2)); --addition
+	subRes <= STD_LOGIC_VECTOR(unsigned('0' & Operand1) - unsigned('0' & Operand2)); --subtraction Rsrc - Rdst
 	notRes <= NOT Operand1;
 
 	negRes <= Operand1(31) & Operand1 WHEN Operand1 = "00000000000000000000000000000000"
@@ -63,8 +64,8 @@ BEGIN
 
 	andRes <= Operand1 AND Operand2; --addition
 	orRes <= Operand2 OR Operand1; --subtraction Rsrc - Rdst
-	incRes <= STD_LOGIC_VECTOR(signed('0' & Operand1) + 1); --INC
-	decRes <= STD_LOGIC_VECTOR(signed('0' & Operand1) - 1); --DEC
+	incRes <= STD_LOGIC_VECTOR(unsigned('0' & Operand1) + 1); --INC
+	decRes <= STD_LOGIC_VECTOR(unsigned('0' & Operand1) - 1); --DEC
 
 	OutTemp <= addRes(31 DOWNTO 0) WHEN AluSignal = "00000"
 		ELSE
@@ -103,9 +104,18 @@ BEGIN
 	---Flags handling
 	---Zero Flag
 	Flags(0) <= '1' WHEN
-	OutTemp = "00000000000000000000000000000000" AND AluSignal /= "01010" AND AluSignal /= "01011" AND AluSignal /= "10001"
-ELSE
-	'0';
+	OutTemp = 
+	"00000000000000000000000000000000" 
+--MovA
+	AND AluSignal /= "01010" 
+--MovB
+	AND AluSignal /= "01011" 
+--NOP
+	AND AluSignal /= "10001"
+--CLRC
+--SETC
+--LD/ST
+	ELSE '0';
 	---Negative Flag
 	Flags(1) <= OutTemp(31) WHEN AluSignal /= "01011" AND AluSignal /= "10001";
 

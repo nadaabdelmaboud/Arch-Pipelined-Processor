@@ -28,25 +28,25 @@ ARCHITECTURE a_RegisterFile OF RegisterFile IS
 
         SIGNAL CanRead : STD_LOGIC := '0';
 
-        SIGNAL Data0 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-        SIGNAL Data1 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-        SIGNAL Data2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-        SIGNAL Data3 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-        SIGNAL Data4 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-        SIGNAL Data5 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-        SIGNAL Data6 : STD_LOGIC_VECTOR(31 DOWNTO 0);
-        SIGNAL Data7 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        SIGNAL R0 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        SIGNAL R1 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        SIGNAL R2 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        SIGNAL R3 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        SIGNAL R4 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        SIGNAL R5 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        SIGNAL R6 : STD_LOGIC_VECTOR(31 DOWNTO 0);
+        SIGNAL R7 : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 BEGIN
 
-        Register0 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(0), WriteData, Data0);
-        Register1 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(1), WriteData, Data1);
-        Register2 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(2), WriteData, Data2);
-        Register3 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(3), WriteData, Data3);
-        Register4 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(4), WriteData, Data4);
-        Register5 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(5), WriteData, Data5);
-        Register6 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(6), WriteData, Data6);
-        Register7 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(7), WriteData, Data7);
+       Register0 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(0), WriteData, R0);
+       Register1 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(1), WriteData, R1);
+       Register2 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(2), WriteData, R2);
+       Register3 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(3), WriteData, R3);
+       Register4 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(4), WriteData, R4);
+       Register5 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(5), WriteData, R5);
+       Register6 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(6), WriteData, R6);
+       Register7 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(7), WriteData, R7);
         ---------------------------------------------------------------------------------
         PROCESS (Clk) IS
         BEGIN
@@ -59,40 +59,40 @@ BEGIN
 
         -----------------------------------------------------------------------------------
         ---Read Rsrc Data---> Register1Data----
-        Register1Data <= Data0 WHEN IR(6 DOWNTO 4) = "000" AND CanRead = '1'
+        Register1Data <= R0 WHEN IR(6 DOWNTO 4) = "000" AND CanRead = '1'
                 ELSE
-                Data1 WHEN IR(6 DOWNTO 4) = "001" AND CanRead = '1'
+                R1 WHEN IR(6 DOWNTO 4) = "001" AND CanRead = '1'
                 ELSE
-                Data2 WHEN IR(6 DOWNTO 4) = "010" AND CanRead = '1'
+                R2 WHEN IR(6 DOWNTO 4) = "010" AND CanRead = '1'
                 ELSE
-                Data3 WHEN IR(6 DOWNTO 4) = "011" AND CanRead = '1'
+                R3 WHEN IR(6 DOWNTO 4) = "011" AND CanRead = '1'
                 ELSE
-                Data4 WHEN IR(6 DOWNTO 4) = "100" AND CanRead = '1'
+                R4 WHEN IR(6 DOWNTO 4) = "100" AND CanRead = '1'
                 ELSE
-                Data5 WHEN IR(6 DOWNTO 4) = "101" AND CanRead = '1'
+                R5 WHEN IR(6 DOWNTO 4) = "101" AND CanRead = '1'
                 ELSE
-                Data6 WHEN IR(6 DOWNTO 4) = "011" AND CanRead = '1'
+                R6 WHEN IR(6 DOWNTO 4) = "011" AND CanRead = '1'
                 ELSE
-                Data7 WHEN IR(6 DOWNTO 4) = "111" AND CanRead = '1'
+                R7 WHEN IR(6 DOWNTO 4) = "111" AND CanRead = '1'
                 ELSE
                 (OTHERS => '0');
         ---------------------------------------------------------------------------
         ---Read Rdst Data---> Register1Data----
-        Register2Data <= Data0 WHEN IR(9 DOWNTO 7) = "000" AND CanRead = '1'
+        Register2Data <= R0 WHEN IR(9 DOWNTO 7) = "000" AND CanRead = '1'
                 ELSE
-                Data1 WHEN IR(9 DOWNTO 7) = "001" AND CanRead = '1'
+                R1 WHEN IR(9 DOWNTO 7) = "001" AND CanRead = '1'
                 ELSE
-                Data2 WHEN IR(9 DOWNTO 7) = "010" AND CanRead = '1'
+                R2 WHEN IR(9 DOWNTO 7) = "010" AND CanRead = '1'
                 ELSE
-                Data3 WHEN IR(9 DOWNTO 7) = "011" AND CanRead = '1'
+                R3 WHEN IR(9 DOWNTO 7) = "011" AND CanRead = '1'
                 ELSE
-                Data4 WHEN IR(9 DOWNTO 7) = "100" AND CanRead = '1'
+                R4 WHEN IR(9 DOWNTO 7) = "100" AND CanRead = '1'
                 ELSE
-                Data5 WHEN IR(9 DOWNTO 7) = "101" AND CanRead = '1'
+                R5 WHEN IR(9 DOWNTO 7) = "101" AND CanRead = '1'
                 ELSE
-                Data6 WHEN IR(9 DOWNTO 7) = "011" AND CanRead = '1'
+                R6 WHEN IR(9 DOWNTO 7) = "011" AND CanRead = '1'
                 ELSE
-                Data7 WHEN IR(9 DOWNTO 7) = "111" AND CanRead = '1'
+                R7 WHEN IR(9 DOWNTO 7) = "111" AND CanRead = '1'
                 ELSE
                 (OTHERS => '0');
 
