@@ -212,11 +212,15 @@ for i in range(len(new_lines)):
         e = "error here 2"
         word_binary = (operands_2[instruction])
         # for loop to check the 2 operands
-        for j in [1, 2]:
-            word = new_lines[i][j]
-            word = word.lower()
+        
+        word = new_lines[i][2]
+        word = word.lower()
             # register
-            word_binary += define_register(word)
+        word_binary += define_register(word)
+        word = new_lines[i][1]
+        word = word.lower()
+            # register
+        word_binary += define_register(word)
         word_binary += '0000'
         print(word_binary)
     # jump instructions

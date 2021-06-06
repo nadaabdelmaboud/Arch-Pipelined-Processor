@@ -32,7 +32,7 @@ BEGIN
 		ELSE
 		'0';
 
-	isRdstMem <= '1' WHEN Rsrc = RdstMem
+	isRdstMem <= '1' WHEN Rdst = RdstMem
 		ELSE
 		'0';
 

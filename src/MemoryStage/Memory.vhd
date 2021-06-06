@@ -14,14 +14,14 @@ END ENTITY ram;
 
 ARCHITECTURE syncrama OF ram IS
 
-	TYPE ram_type IS ARRAY(0 TO 1048575) OF STD_LOGIC_VECTOR(15 DOWNTO 0);
+	TYPE ram_type IS ARRAY(0 TO 3000) OF STD_LOGIC_VECTOR(15 DOWNTO 0);
 	SIGNAL ram : ram_type := (OTHERS => (OTHERS => '0'));
 
 BEGIN
 	PROCESS (clk) IS
 	BEGIN
 		IF rising_edge(clk) THEN
-			IF (MemoryWrite = '1') AND (to_integer(unsigned(address)) < 1048576) THEN
+			IF (MemoryWrite = '1') AND (to_integer(unsigned(address)) < 3000) THEN
 				ram(to_integer(unsigned(address))) <= datain(15 DOWNTO 0);
 				ram(to_integer(unsigned(address)) + 1) <= datain(31 DOWNTO 16);
 			END IF;

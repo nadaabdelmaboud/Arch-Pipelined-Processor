@@ -1,0 +1,701 @@
+# Loading project Arch_pv3
+# Compile of ALU.vhd was successful.
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 16:57:13 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 0 0
+force -freeze sim:/pipeline/Decoding_Stage/Registerfile_COMPONENT/R0 00000000000000000000000000000000 0
+force -freeze sim:/pipeline/Decoding_Stage/Registerfile_COMPONENT/R1 00000000000000000000000000000000 0
+force -freeze sim:/pipeline/Decoding_Stage/Registerfile_COMPONENT/R2 00000000000000000000000000000000 0
+force -freeze sim:/pipeline/Decoding_Stage/Registerfile_COMPONENT/R3 00000000000000000000000000000000 0
+force -freeze sim:/pipeline/Decoding_Stage/Registerfile_COMPONENT/R4 00000000000000000000000000000000 0
+force -freeze sim:/pipeline/Decoding_Stage/Registerfile_COMPONENT/R5 00000000000000000000000000000000 0
+force -freeze sim:/pipeline/Decoding_Stage/Registerfile_COMPONENT/R6 00000000000000000000000000000000 0
+force -freeze sim:/pipeline/Decoding_Stage/Registerfile_COMPONENT/R7 00000000000000000000000000000000 0
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFF 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
+run
+run
+quit -sim
+# End time: 17:04:40 on Jun 05,2021, Elapsed time: 0:07:27
+# Errors: 0, Warnings: 5
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 17:04:45 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 0 0
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFF 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
+run
+run
+run
+run
+run
+quit -sim
+# End time: 17:26:16 on Jun 05,2021, Elapsed time: 0:21:31
+# Errors: 0, Warnings: 4
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 17:26:31 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 0 0
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFF 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 17:44:03 on Jun 05,2021, Elapsed time: 0:17:32
+# Errors: 0, Warnings: 4
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 17:44:16 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 0 0
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFF 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
+quit -sim
+# End time: 17:44:22 on Jun 05,2021, Elapsed time: 0:00:06
+# Errors: 0, Warnings: 4
+# Compile of ForwardingUnit.vhd was successful.
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 17:44:36 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 0 0
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFF 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 17:49:42 on Jun 05,2021, Elapsed time: 0:05:06
+# Errors: 0, Warnings: 5
+# Compile of ALU.vhd was successful.
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 17:49:56 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 0 0
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFF 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 17:53:34 on Jun 05,2021, Elapsed time: 0:03:38
+# Errors: 0, Warnings: 5
+# Compile of ALU.vhd was successful.
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 17:53:46 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 0 0
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFF 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 17:59:39 on Jun 05,2021, Elapsed time: 0:05:53
+# Errors: 0, Warnings: 5
+# Compile of ALU.vhd was successful.
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 17:59:51 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 0 0
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFF 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 18:18:50 on Jun 05,2021, Elapsed time: 0:18:59
+# Errors: 0, Warnings: 5
+# Compile of Pipeline.vhd was successful.
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 18:19:05 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 0 0
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFF 0
+run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 18:32:44 on Jun 05,2021, Elapsed time: 0:13:39
+# Errors: 0, Warnings: 5
+# Compile of fetch.vhd was successful.
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 18:33:00 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 0 0
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+# ** Fatal: (vsim-3734) Index value 25744 is out of range 0 to 3000.
+#    Time: 0 ps  Iteration: 6  Process: /pipeline/Fetch_Stage/ram_component/line__20 File: /home/menna/Arch-Pipelined-Processor/src/FetchStage/instruction_ram.vhd
+# Fatal error in Architecture RAM_ARCHITECTURE at /home/menna/Arch-Pipelined-Processor/src/FetchStage/instruction_ram.vhd line 20
+# 
+# HDL call sequence:
+# Stopped at /home/menna/Arch-Pipelined-Processor/src/FetchStage/instruction_ram.vhd 20 Architecture RAM_ARCHITECTURE
+# 
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
+run
+# Cannot continue because of fatal error.
+# HDL call sequence:
+# Stopped at /home/menna/Arch-Pipelined-Processor/src/FetchStage/instruction_ram.vhd 20 Architecture RAM_ARCHITECTURE
+# 
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFF 0
+run
+# Cannot continue because of fatal error.
+# HDL call sequence:
+# Stopped at /home/menna/Arch-Pipelined-Processor/src/FetchStage/instruction_ram.vhd 20 Architecture RAM_ARCHITECTURE
+# 
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
+run
+# Cannot continue because of fatal error.
+# HDL call sequence:
+# Stopped at /home/menna/Arch-Pipelined-Processor/src/FetchStage/instruction_ram.vhd 20 Architecture RAM_ARCHITECTURE
+# 
+run
+# Cannot continue because of fatal error.
+# HDL call sequence:
+# Stopped at /home/menna/Arch-Pipelined-Processor/src/FetchStage/instruction_ram.vhd 20 Architecture RAM_ARCHITECTURE
+# 
+quit -sim
+# End time: 18:34:08 on Jun 05,2021, Elapsed time: 0:01:08
+# Errors: 1, Warnings: 5
+# Compile of instruction_ram.vhd was successful.
+# Compile of fetch.vhd was successful.
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 18:44:35 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+quit -sim
+# End time: 18:45:08 on Jun 05,2021, Elapsed time: 0:00:33
+# Errors: 0, Warnings: 6
+vsim -gui work.pipeline
+# vsim -gui work.pipeline 
+# Start time: 18:45:25 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.pipeline(arch)
+# Loading work.fetch(fetch_architecture)
+# Loading work.instructions_ram(ram_architecture)
+# Loading work.ifid(arch)
+# Loading work.decodingstage(a_decodingstatge)
+# Loading work.registerfile(a_registerfile)
+# Loading work.regggg(a_reg)
+# Loading work.signextend(a_signextend)
+# Loading work.controlunit(a_controlunit)
+# Loading work.hazard(hazard_architecture)
+# Loading work.muxsignals(a_muxsignals)
+# Loading work.idex(arch)
+# Loading work.execution(executionunit_arch)
+# Loading work.alu(alu_arch)
+# Loading work.alucontroller(alucontroller_arch)
+# Loading work.forwardingunit(forwardingunit_arch)
+# Loading work.exmem(arch)
+# Loading work.memorystage(arch)
+# Loading work.ram(syncrama)
+# Loading work.memwb(arch)
+# Loading work.writestage(arch)
+add wave -r /*
+force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/assmbler/memory.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+force -freeze sim:/pipeline/RST 1 0
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Memory_Stage/ram_component
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /pipeline/Execution_Stage/Alu1
+force -freeze sim:/pipeline/RST 0 0
+run
+# ** Fatal: (vsim-3734) Index value 3001 is out of range 0 to 3000.
+#    Time: 100 ps  Iteration: 2990  Process: /pipeline/Fetch_Stage/ram_component/line__21 File: /home/menna/Arch-Pipelined-Processor/src/FetchStage/instruction_ram.vhd
+# Fatal error in Architecture RAM_ARCHITECTURE at /home/menna/Arch-Pipelined-Processor/src/FetchStage/instruction_ram.vhd line 21
+# 
+# HDL call sequence:
+# Stopped at /home/menna/Arch-Pipelined-Processor/src/FetchStage/instruction_ram.vhd 21 Architecture RAM_ARCHITECTURE
+# 
+quit -sim
+# End time: 18:52:25 on Jun 05,2021, Elapsed time: 0:07:00
+# Errors: 1, Warnings: 4
+# Compile of ALU.vhd was successful.
+vsim -gui work.alu
+# vsim -gui work.alu 
+# Start time: 19:13:30 on Jun 05,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.alu(alu_arch)
+add wave -r /*
+force -freeze sim:/alu/Operand1 'd0 0
+force -freeze sim:/alu/Operand2 'd1 0
+run
