@@ -172,7 +172,7 @@ def define_register(reg):
 
 
 # memory array
-memory = ['0000'] * 1048575
+memory = ['0000'] * 3000
 
 
 reached = 0
