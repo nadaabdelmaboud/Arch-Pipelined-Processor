@@ -101,7 +101,10 @@ BEGIN
 	---Flags handling
 	---Zero Flag
 	--MovA--MovB--NOP--CLRC--SETC--LD/ST
-	Flags(0) <= '1' WHEN OutTemp = "00000000000000000000000000000000" AND AluSignal /= "01010" AND AluSignal /= "01011" AND AluSignal /= "10001"AND AluSignal /= "00100"AND AluSignal /= "00101"AND AluSignal /= "10010"
+
+	Flags(0) <= '0' WHEN AluSignal = "10011"
+ELSE
+	'1' WHEN OutTemp = "00000000000000000000000000000000" AND AluSignal /= "01010" AND AluSignal /= "01011" AND AluSignal /= "10001"AND AluSignal /= "00100"AND AluSignal /= "00101"AND AluSignal /= "10010"
 ELSE
 	'0' WHEN OutTemp /= "00000000000000000000000000000000" AND AluSignal /= "01010" AND AluSignal /= "01011" AND AluSignal /= "10001"AND AluSignal /= "00100"AND AluSignal /= "00101"AND AluSignal /= "10010";
 
