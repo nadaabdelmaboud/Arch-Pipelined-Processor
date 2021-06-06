@@ -62,7 +62,7 @@ BEGIN
     ELSIF (IR(15 DOWNTO 13) = "010" AND IR(12 DOWNTO 10) = "100") THEN
       ControlSignals <= "00110110000101";
     ELSIF (IR(15 DOWNTO 13) = "010" AND IR(12 DOWNTO 10) = "101") THEN
-      ControlSignals <= "00000110000101";
+      ControlSignals <= "00001110000001";
 
       --------------------------------INOUT-------------------------------------
 

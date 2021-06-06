@@ -20,12 +20,13 @@ ENTITY Execution IS
 		MemDataForwarded : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
 		MemRdstAddress : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
 		MemToRegMem : IN STD_LOGIC;
-		Sp : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+		SP_POP_SIGNAL : IN STD_LOGIC;
 
 		MemDataIn : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		AluDataOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		SpOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		Flags : INOUT STD_LOGIC_VECTOR(2 DOWNTO 0) := "000"
+		Flags : INOUT STD_LOGIC_VECTOR(2 DOWNTO 0) := "000";
+		SP : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+
 	);
 END Execution;
 
@@ -60,6 +61,9 @@ ARCHITECTURE ExecutionUnit_Arch OF Execution IS
 	SIGNAL SrcMuxOut, DstMuxOut, AluData : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL FlagsAlu : STD_LOGIC_VECTOR(2 DOWNTO 0);
 	SIGNAL CarryOld : STD_LOGIC;
+	SIGNAL SP_SIGNAL : STD_LOGIC_VECTOR(31 DOWNTO 0) := "00000000000000000000101110111001";
+	SIGNAL SP_PUSH_SIGNAL : STD_LOGIC := '0';
+	SIGNAL SP_SIGNAL_POP_TEMP : STD_LOGIC_VECTOR(31 DOWNTO 0);
 BEGIN
 	-------------------PORTMAPS------------------------------
 	Alu1 : Alu PORT MAP(SrcMuxOut, DstMuxOut, AluSignal, CarryOld, clk, AluData, FlagsAlu);
@@ -94,15 +98,6 @@ BEGIN
 		AluDataForwarded WHEN DstSelector = "01"
 		ELSE
 		MemDataForwarded WHEN DstSelector = "10";
-	---SP if POP
-	---Note: SP value should be handled in integeration
-	---New value Should be written on falling edge
-	PROCESS (clk)
-	BEGIN
-		IF (rising_edge(clk) AND Opcode = "101011") THEN
-			SpOut <= STD_LOGIC_VECTOR(signed(Sp) + 2);
-		END IF;
-	END PROCESS;
 
 	---Flag Register Handling
 	PROCESS (clk)
@@ -113,6 +108,24 @@ BEGIN
 		IF (rising_edge(clk)) THEN
 			Flags <= FlagsAlu;
 			AluDataOut <= AluData;
+		END IF;
+	END PROCESS;
+
+	--SP <= SP_SIGNAL;
+	SP <= SP_SIGNAL_POP_TEMP WHEN Signals(4 DOWNTO 3) = "01"
+		ELSE
+		SP_SIGNAL WHEN Signals(4 DOWNTO 3) = "10";
+	-----SP Register Handling
+	PROCESS (clk, SP_POP_SIGNAL, SP_PUSH_SIGNAL)
+	BEGIN
+		IF (falling_edge(clk)) THEN
+			SP_SIGNAL_POP_TEMP <= SP_SIGNAL;
+		END IF;
+		--PUSH
+		IF (rising_edge(clk) AND Signals(4 DOWNTO 3) = "10") THEN
+			SP_SIGNAL <= STD_LOGIC_VECTOR((unsigned(SP_SIGNAL)) - 2);
+		ELSIF (rising_edge(clk) AND Signals(4 DOWNTO 3) = "01") THEN
+			SP_SIGNAL <= STD_LOGIC_VECTOR((unsigned(SP_SIGNAL)) + 2);
 		END IF;
 	END PROCESS;
 

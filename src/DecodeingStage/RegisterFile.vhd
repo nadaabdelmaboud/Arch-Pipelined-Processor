@@ -39,14 +39,14 @@ ARCHITECTURE a_RegisterFile OF RegisterFile IS
 
 BEGIN
 
-       Register0 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(0), WriteData, R0);
-       Register1 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(1), WriteData, R1);
-       Register2 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(2), WriteData, R2);
-       Register3 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(3), WriteData, R3);
-       Register4 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(4), WriteData, R4);
-       Register5 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(5), WriteData, R5);
-       Register6 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(6), WriteData, R6);
-       Register7 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(7), WriteData, R7);
+        Register0 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(0), WriteData, R0);
+        Register1 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(1), WriteData, R1);
+        Register2 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(2), WriteData, R2);
+        Register3 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(3), WriteData, R3);
+        Register4 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(4), WriteData, R4);
+        Register5 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(5), WriteData, R5);
+        Register6 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(6), WriteData, R6);
+        Register7 : Regggg GENERIC MAP(32) PORT MAP(Clk, Rest, Writeenable(7), WriteData, R7);
         ---------------------------------------------------------------------------------
         PROCESS (Clk) IS
         BEGIN
@@ -71,7 +71,7 @@ BEGIN
                 ELSE
                 R5 WHEN IR(6 DOWNTO 4) = "101" AND CanRead = '1'
                 ELSE
-                R6 WHEN IR(6 DOWNTO 4) = "011" AND CanRead = '1'
+                R6 WHEN IR(6 DOWNTO 4) = "110" AND CanRead = '1'
                 ELSE
                 R7 WHEN IR(6 DOWNTO 4) = "111" AND CanRead = '1'
                 ELSE
@@ -90,7 +90,7 @@ BEGIN
                 ELSE
                 R5 WHEN IR(9 DOWNTO 7) = "101" AND CanRead = '1'
                 ELSE
-                R6 WHEN IR(9 DOWNTO 7) = "011" AND CanRead = '1'
+                R6 WHEN IR(9 DOWNTO 7) = "110" AND CanRead = '1'
                 ELSE
                 R7 WHEN IR(9 DOWNTO 7) = "111" AND CanRead = '1'
                 ELSE
@@ -112,7 +112,7 @@ BEGIN
                 ELSE
                 "00100000" WHEN RdstAddress = "101" AND CanRead = '0' AND RegisterWrite = '1'
                 ELSE
-                "01000000" WHEN RdstAddress = "011" AND CanRead = '0' AND RegisterWrite = '1'
+                "01000000" WHEN RdstAddress = "110" AND CanRead = '0' AND RegisterWrite = '1'
                 ELSE
                 "10000000" WHEN RdstAddress = "111" AND CanRead = '0' AND RegisterWrite = '1'
                 ELSE
