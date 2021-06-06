@@ -172,7 +172,7 @@ def define_register(reg):
 
 
 # memory array
-memory = ['0000'] * 1048575
+memory = ['0000'] * 3000
 
 
 reached = 0
@@ -193,7 +193,8 @@ for i in range(len(new_lines)):
         word_binary += define_register(word)
         word_binary += define_register(word)
         word = new_lines[i][2]
-        memory[addresses[i] +counter] = str(ba2hex(bitarray(int2ba(int(word,base=16), length=16))))
+        memory[addresses[i] +
+               counter] = str(ba2hex(bitarray(int2ba(int(word, base=16), length=16))))
         word_binary += '0000'
         print(word_binary)
 
@@ -212,14 +213,14 @@ for i in range(len(new_lines)):
         e = "error here 2"
         word_binary = (operands_2[instruction])
         # for loop to check the 2 operands
-        
+
         word = new_lines[i][2]
         word = word.lower()
-            # register
+        # register
         word_binary += define_register(word)
         word = new_lines[i][1]
         word = word.lower()
-            # register
+        # register
         word_binary += define_register(word)
         word_binary += '0000'
         print(word_binary)
@@ -253,23 +254,24 @@ for i in range(len(new_lines)):
         word_binary += define_register(word)
         word_binary += '0000'
         print(word_binary)
-        
+
     elif instruction in memImid.keys():
-         e = "error here stack"
-         word_binary = memImid[instruction]
-         word = new_lines[i][1].lower()
-         word_binary += define_register(word)
-         secWord = new_lines[i][2].lower()
-         ina  = secWord.find("(")
-         value = secWord[0:ina]
-         reg2 = secWord[ina+1:len(secWord)-1]
-         word_binary += define_register(reg2)
-         memory[addresses[i]+counter] = str(ba2hex(bitarray(int2ba(int(value,base=16), length=16))))
-         word_binary += '0000'
-         print(word_binary)
-    
+        e = "error here stack"
+        word_binary = memImid[instruction]
+        word = new_lines[i][1].lower()
+        word_binary += define_register(word)
+        secWord = new_lines[i][2].lower()
+        ina = secWord.find("(")
+        value = secWord[0:ina]
+        reg2 = secWord[ina+1:len(secWord)-1]
+        word_binary += define_register(reg2)
+        memory[addresses[i] +
+               counter] = str(ba2hex(bitarray(int2ba(int(value, base=16), length=16))))
+        word_binary += '0000'
+        print(word_binary)
+
     elif instruction.isnumeric():
-        word_binary = int2ba(int(new_lines[i][0],base=16), length=16)
+        word_binary = int2ba(int(new_lines[i][0], base=16), length=16)
     else:
         print(instruction)
         raise Exception("Invalid syntax")
