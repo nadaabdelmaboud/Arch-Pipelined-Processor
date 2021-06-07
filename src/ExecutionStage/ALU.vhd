@@ -109,7 +109,7 @@ ELSE
 	'0' WHEN OutTemp /= "00000000000000000000000000000000" AND AluSignal /= "01010" AND AluSignal /= "01011" AND AluSignal /= "10001"AND AluSignal /= "00100"AND AluSignal /= "00101"AND AluSignal /= "10010";
 
 	---Negative Flag
-	Flags(1) <= OutTemp(31) WHEN AluSignal /= "01011" AND AluSignal /= "10001";
+	Flags(1) <= OutTemp(31) WHEN AluSignal /= "01010" AND AluSignal /= "01011" AND AluSignal /= "10001"AND AluSignal /= "00100"AND AluSignal /= "00101"AND AluSignal /= "10010";
 
 	---Carry Flag with Shift operations
 	Flags(2) <= '0' WHEN AluSignal = "00100"

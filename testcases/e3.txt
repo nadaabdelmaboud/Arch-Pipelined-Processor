@@ -38,5 +38,5 @@ out R6
 #check on load use
 SETC      #C-->1
 POP R6     #R6=300, SP=FFFFFFFE
-INC R6	  #R6=401, this statement shouldn't be executed till call returns, C--> 0, N-->0,Z-->0
+INC R6	   #R6=301, this statement shouldn't be executed till call returns, C--> 0, N-->0,Z-->0
 NOP

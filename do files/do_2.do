@@ -1,7 +1,6 @@
 vsim -gui work.pipeline
-
-mem load -i {/home/menna/Arch-Pipelined-Processor/memoryFiles/memory1.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
-mem load -i {/home/menna/Arch-Pipelined-Processor/memoryFiles/memory1.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/memoryFiles/memory2.mem} -format hex /pipeline/Fetch_Stage/ram_component/ram
+mem load -i {/home/menna/Arch-Pipelined-Processor/memoryFiles/memory2.mem} -format hex /pipeline/Memory_Stage/ram_component/ram
 add wave -position insertpoint  \
 add wave  /pipeline/CLK \
 add wave  /pipeline/RST \
@@ -22,18 +21,15 @@ add wave  /pipeline/Decoding_Stage/Registerfile_COMPONENT/R7 \
 add wave  /pipeline/Execution_Stage/SP_SIGNAL \
 add wave  /pipeline/Execution_Stage/Alu1/Flags 
 force -freeze sim:/pipeline/CLK 0 0, 1 {50 ps} -r 100
+force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
 force -freeze sim:/pipeline/RST 1 0
 run
+force -freeze sim:/pipeline/IN_PORT_DATA 'h19 0
 force -freeze sim:/pipeline/RST 0 0
-force -freeze sim:/pipeline/IN_PORT_DATA 'h5 0
 run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFFFFF 0
 run
-run
-run
-run
-force -freeze sim:/pipeline/IN_PORT_DATA 'h10 0
-run
-run
+force -freeze sim:/pipeline/IN_PORT_DATA 'hFFFFF320 0
 run
 run
 run
@@ -45,3 +41,7 @@ run
 run
 run
 run
+run
+run
+run
+
