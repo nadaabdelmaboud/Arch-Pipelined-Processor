@@ -13,7 +13,6 @@
 # Stages
 | Fetch |Decode  |Execute  |Memory  |Write Back |
 |--|--|--|--|--|
-|  |  | | | |
 
 # Design
 ![Design](https://i.ibb.co/P6vYkcg/Schematic.png)
@@ -358,3 +357,7 @@ and store the result in Rdst and updates carry</td>
     </td>   
   </tr>
  </table>
+
+## License
+
+> This software is licensed under MIT License, See [License](https://github.com/nadaabdelmaboud/Arch-Pipelined-Processor/blob/main/LICENSE)
